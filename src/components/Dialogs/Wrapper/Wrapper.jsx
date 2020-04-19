@@ -18,7 +18,6 @@ function Wrapper(props) {
     }
     return arr;
   }
-  console.log('dsadasd')
   let wrapper_Items = props.dialogs.map((m, index) => {
     return (
       <Route
