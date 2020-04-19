@@ -1,0 +1,37 @@
+.dialogs, .messages {
+  margin-top: 50px;
+  display: inline-block;
+  width: 50%;
+}
+
+.dialogs__item, .messages__item {
+  padding: 25px;
+}
+
+.dialogs__item-online::after {
+  content: '';
+  display: inline-block;
+  margin-left: 8px;
+  margin-top: 11px;
+  vertical-align: top;
+  width: 5px;
+  height: 5px;
+  background-color:green ;
+  border-radius: 50%;
+}
+
+.dialogs__item-offline::after {
+  content: '';
+  display: inline-block;
+  margin-left: 8px;
+  margin-top: 11px;
+  vertical-align: top;
+  width: 5px;
+  height: 5px;
+  background-color:grey ;
+  border-radius: 50%;
+}
+
+.messages__item-active {
+  background-color: #30343E;
+}

@@ -1,0 +1,51 @@
+.avatar {
+  width: 100px;
+}
+
+.description {
+  margin-bottom: 10px;
+}
+
+.post {
+  margin: 20px 0px;
+}
+
+.myPosts {
+  padding: 5px 5px;
+  border: 1px solid black;
+  background-color: #30343E;
+}
+
+.spanMP::after {
+  content: "";
+  width: 64px;
+  height: 3px;
+  background-color: #4984AD;
+  display: block;
+}
+
+#createPost {
+  padding-left: 10px;
+  vertical-align: top;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  height: 50px;
+  width: 90%;
+  overflow: hidden;
+  background-color: #282C34;
+  color: white;
+  border: 1px solid white;
+}
+
+.createPost {
+  margin-bottom: 20px;
+}
+
+#SubmitPost {
+  background-color: #5181B8;
+  color: white;
+  padding: 10px 35px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}

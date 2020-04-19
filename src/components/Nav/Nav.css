@@ -1,0 +1,15 @@
+.settings:first-child {
+  margin-top: 30px;
+}
+
+.settings {
+  margin-bottom: 10px;
+}
+
+.nav {
+  grid-area: nav;
+}
+
+.nav__link__active {
+  color: gold;
+}
