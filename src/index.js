@@ -1,11 +1,5 @@
-
-import * as serviceWorker from "./serviceWorker";
 import { rerenderEntrieTree } from "./render";
-import state from './data';
+import store from './state';
 
-rerenderEntrieTree(state);
+rerenderEntrieTree(store);
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();

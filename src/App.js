@@ -8,7 +8,6 @@ import { Route } from "react-router-dom";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import News from "./components/News/News";
-import { addPost, updateNewPost } from "./data";
 
 function App(props) {
   return (
@@ -17,19 +16,19 @@ function App(props) {
       <Nav />
       <Route
         path="/dialogs"
-        render={() => <Dialogs dialogs={props.state.dialogs.guys} />}
+        render={() => <Dialogs dialogs={props.store._state.dialogs.guys} />}
       />
-      <Route path="/news" component={News} />
-      <Route path="/music" component={Music} />
-      <Route path="/settings" component={Settings} />
+      <Route path="/news" render={News} />
+      <Route path="/music" render={Music} />
+      <Route path="/settings" render={Settings} />
       <Route
         path="/profile"
         render={() => (
           <Main 
-          posts={props.state.myProfile}
-          text={props.state.myProfile.postText}
-          addPost={addPost}
-          updateNewPost={updateNewPost} />
+          posts={props.store._state.myProfile.posts}
+          text={props.store._state.myProfile.postText}
+          addPost={props.store.addPost}
+          updateNewPost={props.store.updateNewPost} />
         )}
       />
     </div>

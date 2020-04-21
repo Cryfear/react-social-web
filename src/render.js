@@ -7,9 +7,8 @@ import { BrowserRouter } from "react-router-dom";
 export let rerenderEntrieTree = (props) => {
   ReactDOM.render(
     <BrowserRouter>
-      <App state={props} />
+      <App store={props} />
     </BrowserRouter>,
     document.getElementById("root")
   );
 };
-

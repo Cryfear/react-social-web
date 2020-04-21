@@ -19,7 +19,7 @@ function CreatePost(props) {
           ref={newPostElement}
           onChange={UpdaterPost}
           type="text"
-          value={props.postText}
+          value={props.text}
           placeholder="Что у вас нового?"
         ></input>
         <button onClick={onButtonClick} id="SubmitPost" type="button">
