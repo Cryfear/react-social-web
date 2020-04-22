@@ -1,5 +1,19 @@
 import { rerenderEntrieTree } from "./render";
 
+export function addPostActionCreater(postMessage) {
+  return {
+    type: "ADD-POST",
+    message: postMessage
+  }
+}
+
+export function updateNewPostActionCreater(newtext) {
+  return {
+    type: "NEW-POST-TEXT",
+    text: newtext
+  }
+}
+
 let store = {
   _state: {
     myProfile: {
@@ -92,32 +106,29 @@ let store = {
       ],
     },
   },
-  addPost(postMessage) {
+  getState() {
+    return this._state;
+  },
+  _addPost(postMessage) {
     store._state.myProfile.posts.push({
       id: store._state.myProfile.posts.length,
       message: postMessage,
       likesCount: 0,
     });
-    rerenderEntrieTree(store._state);
+    rerenderEntrieTree(store);
   },
-  updateNewPost(newText) {
+  _updateNewPost(newText) {
     store._state.myProfile.postText = newText;
     rerenderEntrieTree(store);
   },
-  // dispatch(action) {
-  //   if (action.type == "ADD-POST") {
-  //     store._state.myProfile.posts.push({
-  //       id: store._state.myProfile.posts.length,
-  //       message: postMessage,
-  //       likesCount: 0,
-  //     });
-  //     rerenderEntrieTree(store._state);
-  //   }
-  //   if(action.type == "NEW-POST-TEXT") {
-  //     store._state.myProfile.postText = newText;
-  //     rerenderEntrieTree(store);
-  //   }
-  // },
+  dispatch(action) {
+    if (action.type === "ADD-POST") {
+      store._addPost(action.message)
+    }
+    if(action.type === "NEW-POST-TEXT") {
+      store._updateNewPost(action.text);
+    }
+  },
 };
 
 export default store;

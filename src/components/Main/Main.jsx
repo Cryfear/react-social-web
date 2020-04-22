@@ -10,8 +10,7 @@ function Main(props) {
       <MyPosts
         posts={props.posts}
         text={props.text}
-        addPost={props.addPost}
-        updateNewPost={props.updateNewPost}
+        action={props.action}
       />
     </main>
   );

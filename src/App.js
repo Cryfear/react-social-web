@@ -27,8 +27,7 @@ function App(props) {
           <Main 
           posts={props.store._state.myProfile.posts}
           text={props.store._state.myProfile.postText}
-          addPost={props.store.addPost}
-          updateNewPost={props.store.updateNewPost} />
+          action={props.store.dispatch} />
         )}
       />
     </div>

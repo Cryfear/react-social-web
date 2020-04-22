@@ -12,7 +12,7 @@ function Wrapper(props) {
         <Message
           id={i}
           key={i}
-          message={props.guyDialog[index].props.message[i].message}
+          message={props.allMsg[index].messages[i].message}
         />
       );
     }
@@ -21,6 +21,7 @@ function Wrapper(props) {
   let wrapper_Items = props.dialogs.map((m, index) => {
     return (
       <Route
+        key={index}
         path={`/dialogs/${index + 1}`}
         render={() => (
           <General

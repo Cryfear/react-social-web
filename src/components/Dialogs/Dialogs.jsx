@@ -27,7 +27,7 @@ function Dialogs(props) {
   return (
     <Switch>
       <Wrapper
-        dio = {props.dialogs}
+        allMsg = {props.dialogs}
         guyDialog={guy_Dialog}
         dialogs={dialogs_Items}
         messages={messages_Items}

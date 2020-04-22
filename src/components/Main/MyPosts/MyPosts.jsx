@@ -13,8 +13,7 @@ function MyPosts(props) {
       <CreatePost
         posts={props.posts}
         text={props.text}
-        addPost={props.addPost}
-        updateNewPost={props.updateNewPost}
+        action={props.action}
       />
       <PostsWrapper posts={Posts_Items} />
     </div>
