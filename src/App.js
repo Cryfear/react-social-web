@@ -10,6 +10,7 @@ import Settings from "./components/Settings/Settings";
 import News from "./components/News/News";
 
 function App(props) {
+  console.log(props.store._state)
   return (
     <div className="Wrapper">
       <Header />

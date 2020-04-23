@@ -1,11 +1,12 @@
 import React from "react";
-import {addPostCreater, updateNewPostCreater } from '../../../../state';
+import {addPostCreater, updateNewPostCreater } from '../../../../actions/main-action';
 
 function CreatePost(props) {
   let newPostElement = React.createRef();
   let onButtonClick = () => {
     let text = newPostElement.current.value;
     props.action(addPostCreater(text));
+    props.action(updateNewPostCreater(''))
   };
   let UpdaterPost = (text) => {
     text = newPostElement.current.value;
