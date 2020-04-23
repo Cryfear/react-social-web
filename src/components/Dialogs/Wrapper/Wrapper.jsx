@@ -7,7 +7,7 @@ import Message from "../Message/Message";
 function Wrapper(props) {
   function user_Messages(index) {
     let arr = [];
-    for (let i = 0; i < props.guyDialog[index].props.message.length; i++) {
+    for (let i = 0; i < props.dialog_Messages[index].props.message.length; i++) {
       arr.push(
         <Message
           id={i}
@@ -25,9 +25,12 @@ function Wrapper(props) {
         path={`/dialogs/${index + 1}`}
         render={() => (
           <General
+            id={index}
             key={index}
             dialog={props.dialogs[index]}
             message={user_Messages(index)}
+            allMsg={props.allMsg}
+            action={props.action}
           />
         )}
       />

@@ -16,7 +16,7 @@ function App(props) {
       <Nav />
       <Route
         path="/dialogs"
-        render={() => <Dialogs dialogs={props.store._state.dialogs.guys} />}
+        render={() => <Dialogs action={props.store.dispatch} dialogs={props.store._state.dialogs.guys} />}
       />
       <Route path="/news" render={News} />
       <Route path="/music" render={Music} />

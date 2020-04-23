@@ -1,0 +1,21 @@
+#sendMessage {
+  background-color: #5181B8;
+  color: white;
+  padding: 10px 35px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#typeMessage {
+  padding-left: 10px;
+  vertical-align: top;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  height: 50px;
+  width: 90%;
+  overflow: hidden;
+  background-color: #282C34;
+  color: white;
+  border: 1px solid white;
+}
