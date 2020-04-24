@@ -1,5 +1,5 @@
 import React from "react";
-import {addPostCreater, updateNewPostCreater } from '../../../../actions/main-action';
+import {addPostCreater, updateNewPostCreater } from '../../../../actions/main-reducer';
 
 function CreatePost(props) {
   let newPostElement = React.createRef();

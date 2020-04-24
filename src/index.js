@@ -1,5 +1,5 @@
 import { rerenderEntrieTree } from "./render";
-import store from './state';
+import store from './redux/store';
 
-rerenderEntrieTree(store);
+store.subscribe(()=>rerenderEntrieTree());
 

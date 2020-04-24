@@ -1,7 +1,7 @@
 import React from "react";
 import Dialog from "./Dialog/Dialog";
 import Message from "./Message/Message";
-import store from "../../state";
+import store from "../../redux/store";
 
 let dialogs = store.getState().dialogs.guys;
 

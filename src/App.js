@@ -10,14 +10,14 @@ import Settings from "./components/Settings/Settings";
 import News from "./components/News/News";
 
 function App(props) {
-  console.log(props.store._state)
+  console.log(props.store)
   return (
     <div className="Wrapper">
       <Header />
       <Nav />
       <Route
         path="/dialogs"
-        render={() => <Dialogs action={props.store.dispatch} dialogs={props.store._state.dialogs.guys} />}
+        render={() => <Dialogs action={props.store.dispatch} dialogs={props.store.getState().dialogs.guys} />}
       />
       <Route path="/news" render={News} />
       <Route path="/music" render={Music} />
@@ -26,8 +26,8 @@ function App(props) {
         path="/profile"
         render={() => (
           <Main 
-          posts={props.store._state.myProfile.posts}
-          text={props.store._state.myProfile.postText}
+          posts={props.store.getState().myProfile.posts}
+          text={props.store.getState().myProfile.postText}
           action={props.store.dispatch} />
         )}
       />

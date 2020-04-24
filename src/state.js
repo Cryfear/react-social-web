@@ -1,6 +1,6 @@
 import { rerenderEntrieTree } from "./render";
-import mainAction from './actions/main-action';
-import dialogsAction from './actions/dialogs-action';
+import mainAction from './actions/main-reducer';
+import dialogsAction from './actions/dialogs-reducer';
 
 let store = {
   _state: {

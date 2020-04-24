@@ -3,7 +3,7 @@ import "./General.css";
 import {
   addMessageCreater,
   typeMessageCreater,
-} from "../../../actions/dialogs-action";
+} from "../../../actions/dialogs-reducer";
 
 function General(props) {
   let addMessage = React.createRef();
