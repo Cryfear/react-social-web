@@ -6,17 +6,16 @@ import {
 } from "../../../actions/dialogs-reducer";
 
 function General(props) {
-  let addMessage = React.createRef();
-
-  function typeMessage(e) {
-    let text = addMessage.current.value;
-    props.action(typeMessageCreater(text, props.id));
+  console.log(props);
+  function sendMessage() {
+    let text = props.allMsg[props.id].messageText;
+    props.dispatch(addMessageCreater(text, props.id));
+    props.dispatch(typeMessageCreater("", props.id));
   }
 
-  function sendMessage(e) {
-    let text = addMessage.current.value;
-    props.action(addMessageCreater(text, props.id));
-    props.action(typeMessageCreater("", props.id));
+  function typeMessage(e) {
+    let text = e.currentTarget.value;
+    props.dispatch(typeMessageCreater(text, props.id));
   }
 
   return (
@@ -24,7 +23,6 @@ function General(props) {
       {props.dialog}
       {props.message}
       <input
-        ref={addMessage}
         value={props.allMsg[props.id].messageText}
         onChange={typeMessage}
         id="typeMessage"

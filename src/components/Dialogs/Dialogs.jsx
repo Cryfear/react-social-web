@@ -12,7 +12,7 @@ function Dialogs(props) {
         dialog_Messages={sorted.dialog_Messages}
         dialogs={sorted.dialogs_Items}
         messages={sorted.last_Messages}
-        action={props.action}
+        dispatch={props.dispatch}
       />
     </Switch>
   );

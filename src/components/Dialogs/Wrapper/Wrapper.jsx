@@ -5,7 +5,7 @@ import All from "../All/All";
 import Message from "../Message/Message";
 
 function Wrapper(props) {
-  function user_Messages(index) {
+  let user_Messages = (index) => {
     let arr = [];
     for (let i = 0; i < props.dialog_Messages[index].props.message.length; i++) {
       arr.push(
@@ -30,7 +30,7 @@ function Wrapper(props) {
             dialog={props.dialogs[index]}
             message={user_Messages(index)}
             allMsg={props.allMsg}
-            action={props.action}
+            dispatch={props.dispatch}
           />
         )}
       />

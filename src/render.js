@@ -7,7 +7,7 @@ import store from './redux/store'
 export let rerenderEntrieTree = () => {
   ReactDOM.render(
     <BrowserRouter>
-      <App store={store} />
+      <App state={store.getState()} dispatch={store.dispatch}/>
     </BrowserRouter>,
     document.getElementById("root")
   );

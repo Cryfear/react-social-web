@@ -1,20 +1,19 @@
 import React from "react";
-import CreatePost from "./CreatePost/CreatePost";
 import PostsWrapper from "./PostsWrapper/PostsWrapper";
 import Post from "./PostsWrapper/Post/Post";
+import CreatePostContainer from "./CreatePost/CreatePostContainer";
 
 function MyPosts(props) {
   let Posts_Items = props.posts.map((d, index) => {
     return <Post key={index} message={d.message} likesCount={d.likesCount} />;
   });
-
+ 
   return (
     <div className="myPosts">
       <span className="spanMP">My posts</span>
-      <CreatePost
-        posts={props.posts}
+      <CreatePostContainer
         text={props.text}
-        action={props.action}
+        dispatch={props.dispatch}
       />
       <PostsWrapper posts={Posts_Items} />
     </div>
