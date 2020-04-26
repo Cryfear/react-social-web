@@ -11,10 +11,7 @@ function MyPosts(props) {
   return (
     <div className="myPosts">
       <span className="spanMP">My posts</span>
-      <CreatePostContainer
-        text={props.text}
-        dispatch={props.dispatch}
-      />
+      <CreatePostContainer />
       <PostsWrapper posts={Posts_Items} />
     </div>
   );

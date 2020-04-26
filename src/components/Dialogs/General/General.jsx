@@ -6,7 +6,6 @@ import {
 } from "../../../actions/dialogs-reducer";
 
 function General(props) {
-  console.log(props);
   function sendMessage() {
     let text = props.allMsg[props.id].messageText;
     props.dispatch(addMessageCreater(text, props.id));
