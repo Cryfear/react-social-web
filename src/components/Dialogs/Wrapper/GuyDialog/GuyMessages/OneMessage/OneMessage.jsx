@@ -1,7 +1,7 @@
 import React from "react";
 import TextMessage from "./TextMessage/TextMessage";
 import GuyWrapper from "../../GuyWrapper/GuyWrapper";
-import "../../GuyMessages.css";
+import "../GuyMessages.css";
 import MessageAdd from "../../MessadeAdd/MessageAdd";
 
 function OneMessage(props) {

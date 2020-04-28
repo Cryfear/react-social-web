@@ -1,6 +1,6 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import OneMessage from "./OneMessage/OneMessage";
+import OneMessage from "../OneMessage/OneMessage";
 
 function AllMessages(props) {
   // отдельный диалог с определенным человеком, а именно роут на него

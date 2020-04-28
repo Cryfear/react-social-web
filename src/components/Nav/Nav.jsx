@@ -20,6 +20,9 @@ function Nav() {
       <div  className="settings">
         <NavLink to="/settings" activeClassName="nav__link__active">Settings</NavLink>
       </div>
+      <div  className="settings">
+        <NavLink to="/users" activeClassName="nav__link__active">Users</NavLink>
+      </div>
     </nav>
   );
 }
