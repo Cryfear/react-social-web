@@ -1,49 +1,41 @@
 import React from "react";
-import General from "../General/General";
+import GuyDialog from "./GuyDialog/GuyDialog";
+import AllMessages from "./GuyDialog/GuyMessages/AllMessages/AllMessages";
 import { Route } from "react-router-dom";
-import All from "../All/All";
-import Message from "../Message/Message";
 
 function Wrapper(props) {
-  let user_Messages = (index) => {
-    let arr = [];
-    for (let i = 0; i < props.dialog_Messages[index].props.message.length; i++) {
-      arr.push(
-        <Message
-          id={i}
-          key={i}
-          message={props.allMsg[index].messages[i].message}
-        />
-      );
-    }
-    return arr;
-  }
-  let wrapper_Items = props.dialogs.map((m, index) => {
+  // обертка сообщенй начального уровня, где есть пользователь и его посл. сообщение
+  let GuyDialogItems = props.dialogs.map((m, i) => {
     return (
-      <Route
-        key={index}
-        path={`/dialogs/${index + 1}`}
-        render={() => (
-          <General
-            id={index}
-            key={index}
-            dialog={props.dialogs[index]}
-            message={user_Messages(index)}
-            allMsg={props.allMsg}
-            dispatch={props.dispatch}
-          />
-        )}
+      <GuyDialog status={m.status} key={i} dialogs={props.dialogs} index={i} />
+    );
+  });
+
+  // массив диалогов, а именно ссылок, чтобы при нажатии на диалог, открывался какой-либо
+  let RouterMessages = props.dialogs.map((m, i) => {
+    return (
+      <AllMessages
+        dialogs={props.dialogs}
+        status={m.status}
+        name={m.name}
+        dialog={m.messages}
+        key={i}
+        index={i}
+        dispatch={props.dispatch}
       />
     );
   });
+
   return (
     <main className="content">
-      {wrapper_Items}
-      <Route
+      <Route // роут для основной странички
         exact
-        path="/dialogs/"
-        render={() => <All dialog={props.dialogs} message={props.messages} />}
+        path={`/dialogs/`}
+        render={() => {
+          return GuyDialogItems;
+        }}
       />
+      {RouterMessages}
     </main>
   );
 }

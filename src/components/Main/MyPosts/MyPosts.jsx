@@ -7,7 +7,7 @@ function MyPosts(props) {
   let Posts_Items = props.posts.map((d, index) => {
     return <Post key={index} message={d.message} likesCount={d.likesCount} />;
   });
- 
+
   return (
     <div className="myPosts">
       <span className="spanMP">My posts</span>

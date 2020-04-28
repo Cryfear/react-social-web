@@ -27,7 +27,7 @@ function App(props) {
           <Main 
           posts={props.state.myProfile.posts}
           text={props.state.myProfile.postText}
-          dispatch={props.dispatch} />
+          />
         )}
       />
     </div>

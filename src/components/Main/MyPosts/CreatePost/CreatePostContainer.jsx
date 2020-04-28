@@ -2,7 +2,7 @@ import CreatePost from "./CreatePost";
 import {
   addPostCreater,
   updateNewPostCreater,
-} from "../../../../actions/main-reducer";
+} from "../../../../redux/main-reducer";
 import { connect } from "react-redux";
 
 const mapToStateProps = (state) => {

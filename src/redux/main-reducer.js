@@ -21,7 +21,7 @@ export let mainAction = (state = { ...initialState }, action) => {
     }
 
     case NEW_POST_TEXT: {
-      return { ...state, postText: action.text };
+      return {...state, postText: action.text};
     }
     default:
       return { ...state };

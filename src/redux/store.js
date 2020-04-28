@@ -1,6 +1,6 @@
 import { createStore, combineReducers } from 'redux';
-import mainAction from '../actions/main-reducer';
-import dialogsAction from '../actions/dialogs-reducer';
+import mainAction from './main-reducer';
+import dialogsAction from './dialogs-reducer';
 
 let reducers = combineReducers({
   myProfile: mainAction,

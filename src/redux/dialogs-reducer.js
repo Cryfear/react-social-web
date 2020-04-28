@@ -88,24 +88,23 @@ let initialState = {
       messageText: "",
     },
   ],
-}
+};
 
-let dialogsAction = (state = initialState, action) => {
+let dialogsAction = (state = { ...initialState }, action) => {
   switch (action.type) {
     case ADD_MESSAGE:
       state.guys[action.index].messages.push({
         message: action.message,
       });
-
-      state.guys[action.index].messageText = action.text = "";
-      return state;
+      state.guys[action.index].messageText = "";
+      return { ...state };
 
     case TYPE_MESSAGE:
       state.guys[action.index].messageText = action.text;
-      return state;
+      return { ...state };
 
     default:
-      return state;
+      return { ...state };
   }
 };
 

@@ -10,7 +10,6 @@ function Main(props) {
       <MyPosts
         posts={props.posts}
         text={props.text}
-        dispatch={props.dispatch}
       />
     </main>
   );

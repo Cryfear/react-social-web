@@ -5,15 +5,15 @@
     "header header"
     "nav content";
   grid-template-rows: 60px 1fr;
-  grid-template-columns: 2fr 5fr;
+  grid-template-columns: 1fr 5fr;
   grid-gap: 10px;
-  padding-left: 400px;
-  padding-right: 400px;
+  width: 70%;
 }
 
 body {
   background-color: #282c34;
   margin: 0;
+  padding-left: 400px
 }
 
 a {

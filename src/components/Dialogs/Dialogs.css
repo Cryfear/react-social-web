@@ -1,11 +1,13 @@
 .dialogs, .messages {
-  margin-top: 50px;
+  margin-top: 20px;
   display: inline-block;
-  width: 50%;
+
 }
 
 .dialogs__item, .messages__item {
-  padding: 25px;
+  margin-bottom: 20px;
+  margin-right: 50px;
+  display: inline-block;
 }
 
 .dialogs__item-online::after {
@@ -30,8 +32,4 @@
   height: 5px;
   background-color:grey ;
   border-radius: 50%;
-}
-
-.messages__item-active {
-  background-color: #30343E;
 }
