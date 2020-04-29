@@ -5,26 +5,6 @@ const SET_USERS = "SET_USERS";
 
 let initialState = {
   users: [
-    // {
-    //   photoUrl: "https://media2.24aul.ru/imgs/5bbc114523bbeb64d0197cc6/",
-    //   id: "1",
-    //   followed: true,
-    //   avatar: "someava",
-    //   fullName: "Arthur Morphy",
-    //   city: "Mogilev",
-    //   country: "Belarus",
-    //   status: "im cool!",
-    // },
-    // {
-    //   photoUrl: "https://media2.24aul.ru/imgs/5bbc114523bbeb64d0197cc6/",
-    //   id: "2",
-    //   followed: false,
-    //   avatar: "someava",
-    //   fullName: "Alexander Kit",
-    //   city: "Mogilev",
-    //   country: "Belarus",
-    //   status: "im musucly now!",
-    // },
   ],
 };
 

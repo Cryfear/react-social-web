@@ -1,33 +1,15 @@
 import React from "react";
 import "./Users.css";
+import * as axios from "axios";
 
 function Users(props) {
   let { users, follow, unfollow, setUsers } = props;
   if (users.length === 0) {
-    setUsers([
-      {
-        photoUrl: "https://media2.24aul.ru/imgs/5bbc114523bbeb64d0197cc6/",
-        id: "1",
-        followed: true,
-        avatar: "someava",
-        fullName: "Arthur Morphy",
-        city: "Mogilev",
-        country: "Belarus",
-        status: "im cool!",
-      },
-      {
-        photoUrl: "https://media2.24aul.ru/imgs/5bbc114523bbeb64d0197cc6/",
-        id: "2",
-        followed: false,
-        avatar: "someava",
-        fullName: "Alexander Kit",
-        city: "Mogilev",
-        country: "Belarus",
-        status: "im musucly now!",
-      },
-    ]);
+    axios.get("http://localhost:3000/items").then((response) => {
+      return setUsers(response.data);
+    });
   }
-  return (
+      return (
     <div className="userWrapper">
       {users.map((user, i) => {
         return (
