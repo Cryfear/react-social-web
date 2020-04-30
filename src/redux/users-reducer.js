@@ -3,13 +3,15 @@ const UNFOLLOW_USER = "UNFOLLOW_USER";
 const SHOW_MORE_USERS = "SHOW_MORE_USERS";
 const SET_USERS = "SET_USERS";
 const SWITCH_PAGE = "SWITCH_PAGE";
-const SET_TOTAL_PAGE = 'SET_TOTAL_PAGE';
+const SET_TOTAL_PAGE = "SET_TOTAL_PAGE";
+const TOGGLE_FETCHING = "TOGGLE_FETCHING";
 
 let initialState = {
-  users: [],
+  users: [], // массив пользователей куда приходят пользователи с сервера
   currentPage: 1, // текущая страница, в данном случае начальная
   countView: 4, // по сколько пользователей показывать
   countUsers: 0, // сколько у нас всего пользователей
+  isFetching: true, // состояние процесса загрузки пользователей, true - в процессе
 };
 
 export let usersAction = (state = { ...initialState }, action) => {
@@ -48,12 +50,11 @@ export let usersAction = (state = { ...initialState }, action) => {
     case SET_TOTAL_PAGE: {
       return {
         ...state,
-        countUsers: action.total
-      }
+        countUsers: action.total,
+      };
     }
 
     case SWITCH_PAGE: {
-      console.log(action.page);
       return {
         ...state,
         currentPage: action.page,
@@ -64,39 +65,53 @@ export let usersAction = (state = { ...initialState }, action) => {
       return state;
     }
 
+    case TOGGLE_FETCHING: {
+      return {
+        ...state,
+        isFetching: action.isFetching,
+      };
+    }
+
     default:
       return { ...state };
   }
 };
 
-export const followUserAC = (userId) => ({
+export const follow = (userId) => ({
   type: FOLLOW_USER,
-  userId: userId,
+  userId,
 });
 
-export const unFollowUserAC = (userId) => ({
+export const unfollow = (userId) => ({
   type: UNFOLLOW_USER,
-  userId: userId,
+  userId,
 });
 
-export const setUsersAC = (users) => {
+export const setUsers = (users) => {
   return {
     type: SET_USERS,
-    users: users,
+    users,
   };
 };
 
-export const setUserTotalAC = (total) => {
+export const setUserCount = (total) => {
   return {
     type: SET_TOTAL_PAGE,
-    total: total,
+    total,
   };
 };
 
-export const switchPageAC = (page) => {
+export const toggleFetching = (isFetching) => {
+  return {
+    type: TOGGLE_FETCHING,
+    isFetching,
+  };
+};
+
+export const switchPage = (page) => {
   return {
     type: SWITCH_PAGE,
-    page: page,
+    page,
   };
 };
 

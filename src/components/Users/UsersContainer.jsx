@@ -2,82 +2,83 @@ import { connect } from "react-redux";
 import React from "react";
 import Users from "./Users";
 import {
-  followUserAC,
-  unFollowUserAC,
-  setUsersAC,
-  switchPageAC,
-  setUserTotalAC,
+  follow,
+  unfollow,
+  setUsers,
+  switchPage,
+  setUserCount,
+  toggleFetching,
 } from "../../redux/users-reducer";
 import * as axios from "axios";
 
 let mapStateToProps = (state) => {
+  let { users, currentPage, countView, countUsers, isFetching } = state.users; // деструктуризация
   return {
-    users: state.users.users,
-    currentPage: state.users.currentPage, // текущая страница, в данном случае начальная
-    countView: state.users.countView, // по сколько пользователей показывать
-    countUsers: state.users.countUsers, // сколько у нас всего пользователей
-  };
-};
-
-let mapDispatchToProps = (dispatch) => {
-  return {
-    follow: (userId) => {
-      dispatch(followUserAC(userId));
-    },
-    unfollow: (userId) => {
-      dispatch(unFollowUserAC(userId));
-    },
-    setUsers: (users) => {
-      dispatch(setUsersAC(users));
-    },
-    switchPage: (page) => {
-      dispatch(switchPageAC(page));
-    },
-    setUserCount: (total) => {
-      dispatch(setUserTotalAC(total));
-    },
+    users,
+    currentPage, // текущая страница, в данном случае начальная
+    countView, // по сколько пользователей показывать
+    countUsers, // сколько у нас всего пользователей
+    isFetching // состояние загрузки пользователей
   };
 };
 
 export class UsersAPI extends React.Component {
-  componentDidMount() {
+  componentDidMount() { // загружается один раз при первой отрисовке, если не был сменен url
+    this.props.toggleFetching(true);
     axios
       .get(
         `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.countView}`
       )
       .then((response) => {
+        this.props.toggleFetching(false);
         this.props.setUserCount(response.data.totalCount);
         this.props.setUsers(response.data.items);
-        console.log(this);
       });
   }
 
   switchPagers = (i) => {
-    console.log(this);
+    this.props.toggleFetching(true);
     this.props.switchPage(i);
     axios
       .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${i}&count=${this.countView}`
+        `https://social-network.samuraijs.com/api/1.0/users?page=${i}&count=${this.props.countView}`
       )
       .then((response) => {
+        this.props.toggleFetching(false);
         this.props.setUsers(response.data.items);
       });
-  }
+  };
   render() {
     return (
-      <Users
-        countUsers={this.props.countUsers}
-        countView={this.props.countView}
-        switchPagers={this.switchPagers}
-        switchPage={this.props.switchPage}
-        users={this.props.users}
-        follow={this.props.follow}
-        unfollow={this.props.unfollow}
-      />
+      <>
+        {this.props.isFetching ? (
+          <img
+            width="40"
+            src="https://s4.gifyu.com/images/loading.gif"
+            alt="fetching"
+          />
+        ) : null}
+        <Users
+          countUsers={this.props.countUsers}
+          countView={this.props.countView}
+          switchPagers={this.switchPagers}
+          switchPage={this.props.switchPage}
+          users={this.props.users}
+          follow={this.props.follow}
+          unfollow={this.props.unfollow}
+        />
+      </>
     );
   }
 }
 
-let UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPI);
+let UsersContainer = connect(mapStateToProps, {
+  follow,
+  unfollow,
+  setUsers,
+  switchPage,
+  setUserCount,
+  toggleFetching
+})(UsersAPI);
 
 export default UsersContainer;

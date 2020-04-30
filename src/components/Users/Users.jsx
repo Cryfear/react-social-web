@@ -28,19 +28,19 @@ function Users(props) {
               <img
                 className="avatarUser"
                 src={
+                  user.photos.small ||
                   "https://sun2.beltelecom-by-minsk.userapi.com/bstVldkt1nkT79RZoGYwXj3An8kx-Fht3sgtdQ/Xx4M4GhQmaA.jpg"
                 }
                 alt="ava"
               />
               <div>
-                {" "}
                 {user.followed ? (
                   <button
                     onClick={() => {
                       props.unfollow(user.id);
                     }}
                   >
-                    unfollow{" "}
+                    unfollow
                   </button>
                 ) : (
                   <button
@@ -48,23 +48,23 @@ function Users(props) {
                       props.follow(user.id);
                     }}
                   >
-                    follow{" "}
+                    follow
                   </button>
-                )}{" "}
-              </div>{" "}
-            </div>{" "}
+                )}
+              </div>
+            </div>
             <div className="other">
-              <span className="userWrapper__name"> {user.name} - </span>{" "}
-              <span className="userWrapper__status"> {user.status} </span>{" "}
-              <div className="other__city"> {user.country} </div>{" "}
-              <div className="other__city"> {user.city} </div>{" "}
-            </div>{" "}
+              <span className="userWrapper__name"> {user.name} - </span>
+              <span className="userWrapper__status"> {user.status} </span>
+              <div className="other__city"> {user.country} </div>
+              <div className="other__city"> {user.city} </div>
+            </div>
           </div>
         );
-      })}{" "}
+      })}
       <button className="showMore" type="button">
-        Показать еще{" "}
-      </button>{" "}
+        Показать еще
+      </button>
     </div>
   );
 }
