@@ -2,10 +2,14 @@ const FOLLOW_USER = "FOLLOW_USER";
 const UNFOLLOW_USER = "UNFOLLOW_USER";
 const SHOW_MORE_USERS = "SHOW_MORE_USERS";
 const SET_USERS = "SET_USERS";
+const SWITCH_PAGE = "SWITCH_PAGE";
+const SET_TOTAL_PAGE = 'SET_TOTAL_PAGE';
 
 let initialState = {
-  users: [
-  ],
+  users: [],
+  currentPage: 1, // текущая страница, в данном случае начальная
+  countView: 4, // по сколько пользователей показывать
+  countUsers: 0, // сколько у нас всего пользователей
 };
 
 export let usersAction = (state = { ...initialState }, action) => {
@@ -37,7 +41,22 @@ export let usersAction = (state = { ...initialState }, action) => {
     case SET_USERS: {
       return {
         ...state,
-        users: [...state.users, ...action.users],
+        users: action.users,
+      };
+    }
+
+    case SET_TOTAL_PAGE: {
+      return {
+        ...state,
+        countUsers: action.total
+      }
+    }
+
+    case SWITCH_PAGE: {
+      console.log(action.page);
+      return {
+        ...state,
+        currentPage: action.page,
       };
     }
 
@@ -61,10 +80,23 @@ export const unFollowUserAC = (userId) => ({
 });
 
 export const setUsersAC = (users) => {
-  console.log(users);
   return {
     type: SET_USERS,
     users: users,
+  };
+};
+
+export const setUserTotalAC = (total) => {
+  return {
+    type: SET_TOTAL_PAGE,
+    total: total,
+  };
+};
+
+export const switchPageAC = (page) => {
+  return {
+    type: SWITCH_PAGE,
+    page: page,
   };
 };
 

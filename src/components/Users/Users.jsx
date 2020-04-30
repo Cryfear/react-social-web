@@ -1,53 +1,70 @@
 import React from "react";
 import "./Users.css";
-import * as axios from "axios";
 
 function Users(props) {
-  let { users, follow, unfollow, setUsers } = props;
-  if (users.length === 0) {
-    axios.get("http://localhost:3000/items").then((response) => {
-      return setUsers(response.data);
-    });
+  let buttons = Math.ceil(props.countUsers / props.countView);
+  let spans = [];
+  for (let i = 1; i <= buttons; i++) {
+    spans.push(i);
   }
-      return (
+  return (
     <div className="userWrapper">
-      {users.map((user, i) => {
+      {spans.map((m, i) => {
+        return (
+          <button
+            onClick={() => {
+              props.switchPagers(i + 1);
+            }}
+            key={i}
+          >
+            {i + 1}
+          </button>
+        );
+      })}
+      {props.users.map((user, i) => {
         return (
           <div key={i}>
             <div className="avatarFollow">
-              <img className="avatarUser" src={user.photoUrl} alt="ava" />
+              <img
+                className="avatarUser"
+                src={
+                  "https://sun2.beltelecom-by-minsk.userapi.com/bstVldkt1nkT79RZoGYwXj3An8kx-Fht3sgtdQ/Xx4M4GhQmaA.jpg"
+                }
+                alt="ava"
+              />
               <div>
+                {" "}
                 {user.followed ? (
                   <button
                     onClick={() => {
-                      unfollow(user.id);
+                      props.unfollow(user.id);
                     }}
                   >
-                    follow
+                    unfollow{" "}
                   </button>
                 ) : (
                   <button
                     onClick={() => {
-                      follow(user.id);
+                      props.follow(user.id);
                     }}
                   >
-                    unfollow
+                    follow{" "}
                   </button>
-                )}
-              </div>
-            </div>
+                )}{" "}
+              </div>{" "}
+            </div>{" "}
             <div className="other">
-              <span className="userWrapper__name">{user.fullName} - </span>
-              <span className="userWrapper__status">{user.status}</span>
-              <div className="other__city">{user.country}</div>
-              <div className="other__city">{user.city}</div>
-            </div>
+              <span className="userWrapper__name"> {user.name} - </span>{" "}
+              <span className="userWrapper__status"> {user.status} </span>{" "}
+              <div className="other__city"> {user.country} </div>{" "}
+              <div className="other__city"> {user.city} </div>{" "}
+            </div>{" "}
           </div>
         );
-      })}
+      })}{" "}
       <button className="showMore" type="button">
-        Показать еще
-      </button>
+        Показать еще{" "}
+      </button>{" "}
     </div>
   );
 }
