@@ -11,7 +11,7 @@ function CreatePost(props) {
           type="text"
           value={text}
           placeholder="Что у вас нового?"
-        ></input>
+        />
         <button onClick={onButtonClick} id="SubmitPost" type="button">
           Опубликовать
         </button>

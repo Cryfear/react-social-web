@@ -18,12 +18,13 @@ let mapStateToProps = (state) => {
     currentPage, // текущая страница, в данном случае начальная
     countView, // по сколько пользователей показывать
     countUsers, // сколько у нас всего пользователей
-    isFetching // состояние загрузки пользователей
+    isFetching, // состояние загрузки пользователей
   };
 };
 
 export class UsersAPI extends React.Component {
-  componentDidMount() { // загружается один раз при первой отрисовке, если не был сменен url
+  componentDidMount() {
+    // загружается один раз при первой отрисовке, если не был сменен url
     this.props.toggleFetching(true);
     axios
       .get(
@@ -73,12 +74,13 @@ export class UsersAPI extends React.Component {
 }
 
 let UsersContainer = connect(mapStateToProps, {
+  // connect делает автоматическую обертку с dispatch
   follow,
   unfollow,
   setUsers,
   switchPage,
   setUserCount,
-  toggleFetching
+  toggleFetching,
 })(UsersAPI);
 
 export default UsersContainer;

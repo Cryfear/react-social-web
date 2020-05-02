@@ -1,5 +1,7 @@
 const ADD_POST = "ADD-POST";
 const NEW_POST_TEXT = "NEW-POST-TEXT";
+const GET_USER = "GET_USER";
+const TOGGLE_FETCHING = "TOGGLE_FETCHING";
 
 let initialState = {
   posts: [
@@ -7,6 +9,8 @@ let initialState = {
     { message: "Post 2", id: "2", likesCount: 25 },
   ],
   postText: "",
+  profile: null,
+  isFetching: false,
 };
 
 export let mainAction = (state = { ...initialState }, action) => {
@@ -21,8 +25,20 @@ export let mainAction = (state = { ...initialState }, action) => {
     }
 
     case NEW_POST_TEXT: {
-      return {...state, postText: action.text};
+      return { ...state, postText: action.text };
     }
+
+    case GET_USER: {
+      return { ...state, profile: action.profile };
+    }
+
+    case TOGGLE_FETCHING: {
+      return {
+        ...state,
+        isFetching: action.toggle,
+      };
+    }
+
     default:
       return { ...state };
   }
@@ -32,9 +48,21 @@ export const addPostCreater = () => ({
   type: ADD_POST,
 });
 
-export const updateNewPostCreater = (newtext) => ({
+export const updateNewPostCreater = (text) => ({
   type: NEW_POST_TEXT,
-  text: newtext,
+  text,
 });
+
+export const toggleFetching = (toggle) => ({
+  type: TOGGLE_FETCHING,
+  toggle,
+});
+
+export const getUser = (profile) => {
+  return {
+    type: GET_USER,
+    profile,
+  };
+};
 
 export default mainAction;

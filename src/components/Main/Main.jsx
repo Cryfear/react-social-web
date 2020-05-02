@@ -6,11 +6,8 @@ import MyPosts from "./MyPosts/MyPosts";
 function Main(props) {
   return (
     <main className="content">
-      <Description />
-      <MyPosts
-        posts={props.posts}
-        text={props.text}
-      />
+      <Description profile={props.profile} />
+      <MyPosts posts={props.posts} text={props.text} />
     </main>
   );
 }

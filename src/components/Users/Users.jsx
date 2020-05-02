@@ -1,10 +1,11 @@
 import React from "react";
 import "./Users.css";
+import { NavLink } from "react-router-dom";
 
 function Users(props) {
-  let buttons = Math.ceil(props.countUsers / props.countView);
+  // let buttons = Math.ceil(props.countUsers / props.countView);
   let spans = [];
-  for (let i = 1; i <= buttons; i++) {
+  for (let i = 1; i <= 25; i++) {
     spans.push(i);
   }
   return (
@@ -25,14 +26,16 @@ function Users(props) {
         return (
           <div key={i}>
             <div className="avatarFollow">
-              <img
-                className="avatarUser"
-                src={
-                  user.photos.small ||
-                  "https://sun2.beltelecom-by-minsk.userapi.com/bstVldkt1nkT79RZoGYwXj3An8kx-Fht3sgtdQ/Xx4M4GhQmaA.jpg"
-                }
-                alt="ava"
-              />
+              <NavLink exact to={`/profile/${user.id}`}>
+                <img
+                  className="avatarUser"
+                  src={
+                    user.photos.small ||
+                    "https://sun2.beltelecom-by-minsk.userapi.com/bstVldkt1nkT79RZoGYwXj3An8kx-Fht3sgtdQ/Xx4M4GhQmaA.jpg"
+                  }
+                  alt="ava"
+                />
+              </NavLink>
               <div>
                 {user.followed ? (
                   <button
