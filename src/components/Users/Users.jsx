@@ -1,6 +1,7 @@
 import React from "react";
 import "./Users.css";
 import { NavLink } from "react-router-dom";
+import { UnfollowApi, FollowApi } from "../../api/api";
 
 function Users(props) {
   // let buttons = Math.ceil(props.countUsers / props.countView);
@@ -40,7 +41,11 @@ function Users(props) {
                 {user.followed ? (
                   <button
                     onClick={() => {
-                      props.unfollow(user.id);
+                      UnfollowApi.unfollow(user.id).then((response) => {
+                        if (response.resultCode === 0) {
+                          props.unfollow(user.id);
+                        }
+                      });
                     }}
                   >
                     unfollow
@@ -48,7 +53,11 @@ function Users(props) {
                 ) : (
                   <button
                     onClick={() => {
-                      props.follow(user.id);
+                      FollowApi.follow(user.id).then((response) => {
+                        if (response.resultCode === 0) {
+                          props.follow(user.id);
+                        }
+                      });
                     }}
                   >
                     follow

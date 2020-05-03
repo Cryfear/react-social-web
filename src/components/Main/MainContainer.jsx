@@ -69,4 +69,5 @@ let mapStateToProps = (state) => {
 let MainContainer = connect(mapStateToProps, { getUser, toggleFetching })(
   MainAPI
 );
+
 export default withRouter(MainContainer);
