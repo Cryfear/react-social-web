@@ -5,6 +5,7 @@ const SET_USERS = "SET_USERS";
 const SWITCH_PAGE = "SWITCH_PAGE";
 const SET_TOTAL_PAGE = "SET_TOTAL_PAGE";
 const TOGGLE_FETCHING = "TOGGLE_FETCHING";
+const BUTTONS_DISABLED = "BUTTONS_DISABLED";
 
 let initialState = {
   users: [], // массив пользователей куда приходят пользователи с сервера
@@ -12,6 +13,7 @@ let initialState = {
   countView: 4, // по сколько пользователей показывать
   countUsers: 0, // сколько у нас всего пользователей
   isFetching: true, // состояние процесса загрузки пользователей, true - в процессе
+  buttonsDisabled: [7755, 7754],
 };
 
 export let usersAction = (state = { ...initialState }, action) => {
@@ -72,6 +74,15 @@ export let usersAction = (state = { ...initialState }, action) => {
       };
     }
 
+    case BUTTONS_DISABLED: {
+      return {
+        ...state,
+        buttonsDisabled: action.isDisable
+          ? [...state.buttonsDisabled, action.userId]
+          : state.buttonsDisabled.filter((id) => id !== action.userId),
+      };
+    }
+
     default:
       return { ...state };
   }
@@ -112,6 +123,14 @@ export const switchPage = (page) => {
   return {
     type: SWITCH_PAGE,
     page,
+  };
+};
+
+export const toggleButtonsDisabled = (isDisable, userId) => {
+  return {
+    type: BUTTONS_DISABLED,
+    isDisable,
+    userId,
   };
 };
 

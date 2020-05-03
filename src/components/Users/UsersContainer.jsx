@@ -7,6 +7,7 @@ import {
   setUsers,
   setUserCount,
   toggleFetching,
+  toggleButtonsDisabled,
 } from "../../redux/users-reducer";
 import { UsersApi } from "../../api/api";
 import LoaderImg from "../LoaderImg/LoaderImg";
@@ -32,9 +33,7 @@ export class UsersAPIComponent extends React.Component {
   render() {
     return (
       <>
-        {this.props.isFetching ? (
-          <LoaderImg />
-        ) : null}
+        {this.props.isFetching ? <LoaderImg /> : null}
         <Users
           countUsers={this.props.countUsers}
           countView={this.props.countView}
@@ -43,6 +42,8 @@ export class UsersAPIComponent extends React.Component {
           users={this.props.users}
           follow={this.props.follow}
           unfollow={this.props.unfollow}
+          toggleButtonsDisabled={this.props.toggleButtonsDisabled}
+          buttonsDisabled={this.props.buttonsDisabled}
         />
       </>
     );
@@ -50,13 +51,21 @@ export class UsersAPIComponent extends React.Component {
 }
 
 let mapStateToProps = (state) => {
-  let { users, currentPage, countView, countUsers, isFetching } = state.users; // деструктуризация
+  let {
+    users,
+    currentPage,
+    countView,
+    countUsers,
+    isFetching,
+    buttonsDisabled,
+  } = state.users; // деструктуризация
   return {
     users,
     currentPage, // текущая страница, в данном случае начальная
     countView, // по сколько пользователей показывать
     countUsers, // сколько у нас всего пользователей
     isFetching, // состояние загрузки пользователей
+    buttonsDisabled, // состояние выключеной или включенной кнопки
   };
 };
 
@@ -67,6 +76,7 @@ let UsersContainer = connect(mapStateToProps, {
   setUsers,
   setUserCount,
   toggleFetching,
+  toggleButtonsDisabled,
 })(UsersAPIComponent);
 
 export default UsersContainer;

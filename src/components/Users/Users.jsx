@@ -40,9 +40,14 @@ function Users(props) {
               <div>
                 {user.followed ? (
                   <button
+                    disabled={props.buttonsDisabled.some(
+                      (id) => id === user.id
+                    )}
                     onClick={() => {
+                      props.toggleButtonsDisabled(true, user.id);
                       UnfollowApi.unfollow(user.id).then((response) => {
                         if (response.resultCode === 0) {
+                          props.toggleButtonsDisabled(false, user.id);
                           props.unfollow(user.id);
                         }
                       });
@@ -52,9 +57,12 @@ function Users(props) {
                   </button>
                 ) : (
                   <button
+                    disabled={props.buttonsDisabled.some((m) => m === user.id)}
                     onClick={() => {
+                      props.toggleButtonsDisabled(true, user.id);
                       FollowApi.follow(user.id).then((response) => {
                         if (response.resultCode === 0) {
+                          props.toggleButtonsDisabled(false, user.id);
                           props.follow(user.id);
                         }
                       });
