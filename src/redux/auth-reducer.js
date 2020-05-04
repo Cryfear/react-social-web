@@ -1,3 +1,5 @@
+import { UsersApi } from "../api/api";
+
 const AUTH_USER = "AUTH_USER";
 
 let initialState = {
@@ -13,7 +15,7 @@ export let authAction = (state = { ...initialState }, action) => {
       return {
         ...state,
         ...action.user,
-        isAuth: true
+        isAuth: true,
       };
     }
 
@@ -26,5 +28,14 @@ export const setAuthUser = (user) => ({
   type: AUTH_USER,
   user,
 });
+
+export const setUser = () => {
+  return (dispatch) => {
+    UsersApi.getMe().then((data) => {
+      console.log(data);
+      dispatch(setAuthUser(data));
+    });
+  };
+};
 
 export default authAction;

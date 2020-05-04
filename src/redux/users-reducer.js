@@ -1,3 +1,5 @@
+import { UsersApi } from "../api/api";
+
 const FOLLOW_USER = "FOLLOW_USER";
 const UNFOLLOW_USER = "UNFOLLOW_USER";
 const SHOW_MORE_USERS = "SHOW_MORE_USERS";
@@ -13,7 +15,7 @@ let initialState = {
   countView: 4, // по сколько пользователей показывать
   countUsers: 0, // сколько у нас всего пользователей
   isFetching: true, // состояние процесса загрузки пользователей, true - в процессе
-  buttonsDisabled: [7755, 7754],
+  buttonsDisabled: [],
 };
 
 export let usersAction = (state = { ...initialState }, action) => {
@@ -88,12 +90,12 @@ export let usersAction = (state = { ...initialState }, action) => {
   }
 };
 
-export const follow = (userId) => ({
+export const followAccept = (userId) => ({
   type: FOLLOW_USER,
   userId,
 });
 
-export const unfollow = (userId) => ({
+export const unfollowAccept = (userId) => ({
   type: UNFOLLOW_USER,
   userId,
 });
@@ -131,6 +133,41 @@ export const toggleButtonsDisabled = (isDisable, userId) => {
     type: BUTTONS_DISABLED,
     isDisable,
     userId,
+  };
+};
+
+export const getUsers = (currentPage, countView) => {
+  return (dispatch) => {
+    UsersApi.getUser(currentPage, countView).then((data) => {
+      console.log(data);
+      dispatch(setUserCount(data.totalCount));
+      dispatch(setUsers(data.items));
+      dispatch(toggleFetching(false));
+    });
+  };
+};
+
+export const follow = (userId) => {
+  return (dispatch) => {
+    dispatch(toggleButtonsDisabled(true, userId));
+    UsersApi.follow(userId).then((response) => {
+      if (response.resultCode === 0) {
+        dispatch(toggleButtonsDisabled(false, userId));
+        dispatch(followAccept(userId));
+      }
+    });
+  };
+};
+
+export const unfollow = (userId) => {
+  return (dispatch) => {
+    dispatch(toggleButtonsDisabled(true, userId));
+    UsersApi.unfollow(userId).then((response) => {
+      if (response.resultCode === 0) {
+        dispatch(toggleButtonsDisabled(false, userId));
+        dispatch(unfollowAccept(userId));
+      }
+    });
   };
 };
 

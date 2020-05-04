@@ -1,7 +1,6 @@
 import React from "react";
 import "./Users.css";
 import { NavLink } from "react-router-dom";
-import { UnfollowApi, FollowApi } from "../../api/api";
 
 function Users(props) {
   // let buttons = Math.ceil(props.countUsers / props.countView);
@@ -44,13 +43,7 @@ function Users(props) {
                       (id) => id === user.id
                     )}
                     onClick={() => {
-                      props.toggleButtonsDisabled(true, user.id);
-                      UnfollowApi.unfollow(user.id).then((response) => {
-                        if (response.resultCode === 0) {
-                          props.toggleButtonsDisabled(false, user.id);
-                          props.unfollow(user.id);
-                        }
-                      });
+                      props.unfollow(user.id)
                     }}
                   >
                     unfollow
@@ -59,13 +52,7 @@ function Users(props) {
                   <button
                     disabled={props.buttonsDisabled.some((m) => m === user.id)}
                     onClick={() => {
-                      props.toggleButtonsDisabled(true, user.id);
-                      FollowApi.follow(user.id).then((response) => {
-                        if (response.resultCode === 0) {
-                          props.toggleButtonsDisabled(false, user.id);
-                          props.follow(user.id);
-                        }
-                      });
+                      props.follow(user.id)
                     }}
                   >
                     follow

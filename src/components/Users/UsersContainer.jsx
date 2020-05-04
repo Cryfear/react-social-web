@@ -4,45 +4,28 @@ import Users from "./Users";
 import {
   follow,
   unfollow,
-  setUsers,
-  setUserCount,
-  toggleFetching,
   toggleButtonsDisabled,
+  getUsers,
 } from "../../redux/users-reducer";
-import { UsersApi } from "../../api/api";
 import LoaderImg from "../LoaderImg/LoaderImg";
 
 export class UsersAPIComponent extends React.Component {
   componentDidMount() {
-    // загружается один раз при первой отрисовке, если не был сменен url
-    UsersApi.getUser(this.props.currentPage, this.props.countView).then(
-      (data) => {
-        this.props.toggleFetching(false);
-        this.props.setUserCount(data.totalCount);
-        this.props.setUsers(data.items);
-      }
-    );
+    this.props.getUsers(this.props.currentPage, this.props.countView);
   }
 
   switchPagers = (i) => {
-    UsersApi.getUser(i, this.props.countView).then((data) => {
-      this.props.toggleFetching(false);
-      this.props.setUsers(data.items);
-    });
+    this.props.getUsers(i, this.props.countView);
   };
   render() {
     return (
       <>
         {this.props.isFetching ? <LoaderImg /> : null}
         <Users
-          countUsers={this.props.countUsers}
-          countView={this.props.countView}
           switchPagers={this.switchPagers}
-          switchPage={this.props.switchPage}
           users={this.props.users}
           follow={this.props.follow}
           unfollow={this.props.unfollow}
-          toggleButtonsDisabled={this.props.toggleButtonsDisabled}
           buttonsDisabled={this.props.buttonsDisabled}
         />
       </>
@@ -73,10 +56,8 @@ let UsersContainer = connect(mapStateToProps, {
   // connect делает автоматическую обертку с dispatch
   follow,
   unfollow,
-  setUsers,
-  setUserCount,
-  toggleFetching,
   toggleButtonsDisabled,
+  getUsers,
 })(UsersAPIComponent);
 
 export default UsersContainer;
