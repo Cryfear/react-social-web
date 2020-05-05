@@ -33,7 +33,9 @@ export const setUser = () => {
   return (dispatch) => {
     UsersApi.getMe().then((data) => {
       console.log(data);
-      dispatch(setAuthUser(data));
+      if (data.login) {
+        dispatch(setAuthUser(data));
+      }
     });
   };
 };

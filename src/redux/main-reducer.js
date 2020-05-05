@@ -1,3 +1,5 @@
+import { UsersApi } from "../api/api";
+
 const ADD_POST = "ADD-POST";
 const NEW_POST_TEXT = "NEW-POST-TEXT";
 const GET_USER = "GET_USER";
@@ -59,9 +61,19 @@ export const toggleFetching = (toggle) => ({
 });
 
 export const getUser = (profile) => {
+  console.log("yeap");
   return {
     type: GET_USER,
     profile,
+  };
+};
+
+export const checkUser = (userId) => {
+  return (dispatch) => {
+    UsersApi.checkUser(userId).then((response) => {
+      dispatch(getUser(response));
+      dispatch(toggleFetching(false));
+    });
   };
 };
 

@@ -1,24 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
-import * as axios from "axios";
 import Main from "./Main";
-import { getUser, toggleFetching } from "../../redux/main-reducer";
+import { getUser, toggleFetching, checkUser } from "../../redux/main-reducer";
 import { withRouter } from "react-router-dom";
 import UserProfile from "./UserProfile/UserProfile";
 
 class MainAPI extends React.Component {
   componentDidMount = () => {
     if (this.props.match.params.userId) {
-      this.props.toggleFetching(true);
-      axios
-        .get(
-          `https://social-network.samuraijs.com/api/1.0/profile/${this.props.match.params.userId}`
-        )
-        .then((response) => {
-          this.props.getUser(response.data);
-          this.props.toggleFetching(false);
-          console.log(response.data);
-        });
+      this.props.checkUser(this.props.match.params.userId);
     }
   };
 
@@ -35,7 +25,6 @@ class MainAPI extends React.Component {
     if (this.props.match.params.userId) {
       return (
         <UserProfile
-          getUser={this.props.getUser}
           toggleFetching={this.props.toggleFetching}
           userId={this.props.match.params.userId}
           isFetching={this.props.isFetching}
@@ -63,11 +52,14 @@ let mapStateToProps = (state) => {
     text: postText,
     profile,
     isFetching,
+    isAuth: state.auth.isAuth,
   };
 };
 
-let MainContainer = connect(mapStateToProps, { getUser, toggleFetching })(
-  MainAPI
-);
+let MainContainer = connect(mapStateToProps, {
+  getUser,
+  toggleFetching,
+  checkUser,
+})(MainAPI);
 
 export default withRouter(MainContainer);
