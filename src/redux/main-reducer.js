@@ -2,6 +2,7 @@ import { UsersApi } from "../api/api";
 
 const ADD_POST = "ADD-POST";
 const NEW_POST_TEXT = "NEW-POST-TEXT";
+const NEW_STATUS_TEXT = "NEW_STATUS_TEXT";
 const GET_USER = "GET_USER";
 const TOGGLE_FETCHING = "TOGGLE_FETCHING";
 
@@ -12,7 +13,15 @@ let initialState = {
   ],
   postText: "",
   profile: null,
-  isFetching: false
+  isFetching: false,
+  myProfile: {
+    name: "Arthur Morphy",
+    avatar:
+      "https://sun9-47.userapi.com/c857520/v857520118/13765d/yWNm9_uF_XM.jpg",
+    status: "Hello guys!",
+    education: "Basic, none",
+    birthday: "24.11.2001",
+  },
 };
 
 export let mainAction = (state = { ...initialState }, action) => {
@@ -28,6 +37,10 @@ export let mainAction = (state = { ...initialState }, action) => {
 
     case NEW_POST_TEXT: {
       return { ...state, postText: action.text };
+    }
+
+    case NEW_STATUS_TEXT: {
+      return { ...state, myProfile: {...state.myProfile, status: action.text}};
     }
 
     case GET_USER: {
@@ -55,13 +68,17 @@ export const updateNewPostCreater = (text) => ({
   text,
 });
 
+export const updateStatusTextCreater = (text) => ({
+  type: NEW_STATUS_TEXT,
+  text,
+});
+
 export const toggleFetching = (toggle) => ({
   type: TOGGLE_FETCHING,
   toggle,
 });
 
 export const getUser = (profile) => {
-  console.log("yeap");
   return {
     type: GET_USER,
     profile,

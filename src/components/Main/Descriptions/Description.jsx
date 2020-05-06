@@ -1,15 +1,13 @@
 import React from "react";
+import ProfileStatusContainer from "./ProfileStatusContainer";
 
 function Description(props) {
   return (
     <div className="description">
-      <img
-        className="avatar"
-        alt="avatar"
-        src="https://sun9-47.userapi.com/c857520/v857520118/13765d/yWNm9_uF_XM.jpg"
-      ></img>
-      <div className="education">Basic, None</div>
-      <div className="birthday">24.11.2001</div>
+      <img className="avatar" alt="avatar" src={props.myProfile.avatar}></img>
+      <ProfileStatusContainer />
+      <div className="education">{props.myProfile.education}</div>
+      <div className="birthday">{props.myProfile.birthday}</div>
     </div>
   );
 }

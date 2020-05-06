@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import Main from "./Main";
-import { getUser, toggleFetching, checkUser } from "../../redux/main-reducer";
+import { getUser, toggleFetching, checkUser} from "../../redux/main-reducer";
 import { withRouter, Redirect } from "react-router-dom";
 import UserProfile from "./UserProfile/UserProfile";
 import { withAuthRedirect } from "../HOC/withAuthRedirect";
@@ -32,14 +32,14 @@ class MainAPI extends React.Component {
           toggleFetching={this.props.toggleFetching}
           userId={this.props.match.params.userId}
           isFetching={this.props.isFetching}
-          profile={this.props.profile}
+          profile={this.props.myProfile}
         />
       );
     } else {
       return (
         <>
           <Main
-            profile={this.props.profile}
+            myProfile={this.props.myProfile}
             posts={this.props.posts}
             text={this.props.text}
           />
@@ -57,6 +57,8 @@ let mapStateToProps = (state) => {
     profile,
     isFetching,
     isAuth: state.auth.isAuth,
+    myProfileId: state.auth.id,
+    myProfile: state.myProfile.myProfile
   };
 };
 
@@ -65,7 +67,7 @@ export default compose(
   connect(mapStateToProps, {
     getUser,
     toggleFetching,
-    checkUser,
+    checkUser
   }),
   withAuthRedirect
 )(MainAPI);
