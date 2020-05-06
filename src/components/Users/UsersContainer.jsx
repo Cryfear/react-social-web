@@ -8,6 +8,8 @@ import {
   getUsers,
 } from "../../redux/users-reducer";
 import LoaderImg from "../LoaderImg/LoaderImg";
+import { withAuthRedirect } from "../HOC/withAuthRedirect";
+import { compose } from "redux";
 
 export class UsersAPIComponent extends React.Component {
   componentDidMount() {
@@ -49,15 +51,16 @@ let mapStateToProps = (state) => {
     countUsers, // сколько у нас всего пользователей
     isFetching, // состояние загрузки пользователей
     buttonsDisabled, // состояние выключеной или включенной кнопки
+    isAuth: state.auth.isAuth,
   };
 };
 
-let UsersContainer = connect(mapStateToProps, {
-  // connect делает автоматическую обертку с dispatch
-  follow,
-  unfollow,
-  toggleButtonsDisabled,
-  getUsers,
-})(UsersAPIComponent);
-
-export default UsersContainer;
+export default compose(
+  connect(mapStateToProps, {
+    follow,
+    unfollow,
+    toggleButtonsDisabled,
+    getUsers,
+  }),
+  withAuthRedirect
+)(UsersAPIComponent);

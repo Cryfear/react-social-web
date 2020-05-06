@@ -2,8 +2,10 @@ import React from "react";
 import { connect } from "react-redux";
 import Main from "./Main";
 import { getUser, toggleFetching, checkUser } from "../../redux/main-reducer";
-import { withRouter } from "react-router-dom";
+import { withRouter, Redirect } from "react-router-dom";
 import UserProfile from "./UserProfile/UserProfile";
+import { withAuthRedirect } from "../HOC/withAuthRedirect";
+import { compose } from "redux";
 
 class MainAPI extends React.Component {
   componentDidMount = () => {
@@ -13,6 +15,8 @@ class MainAPI extends React.Component {
   };
 
   render = () => {
+    if (!this.props.isAuth) return <Redirect to="/login" />;
+
     if (this.props.isFetching === true) {
       return (
         <img
@@ -56,10 +60,12 @@ let mapStateToProps = (state) => {
   };
 };
 
-let MainContainer = connect(mapStateToProps, {
-  getUser,
-  toggleFetching,
-  checkUser,
-})(MainAPI);
-
-export default withRouter(MainContainer);
+export default compose(
+  withRouter,
+  connect(mapStateToProps, {
+    getUser,
+    toggleFetching,
+    checkUser,
+  }),
+  withAuthRedirect
+)(MainAPI);

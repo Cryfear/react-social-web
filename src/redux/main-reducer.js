@@ -12,7 +12,7 @@ let initialState = {
   ],
   postText: "",
   profile: null,
-  isFetching: false,
+  isFetching: false
 };
 
 export let mainAction = (state = { ...initialState }, action) => {
