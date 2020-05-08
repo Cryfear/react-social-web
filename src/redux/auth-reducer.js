@@ -1,4 +1,4 @@
-import { UsersApi } from "../api/api";
+import { myProfileApi } from "../api/api";
 
 const AUTH_USER = "AUTH_USER";
 
@@ -31,7 +31,7 @@ export const setAuthUser = (user) => ({
 
 export const setUser = () => {
   return (dispatch) => {
-    UsersApi.getMe().then((data) => {
+    myProfileApi.getMe().then((data) => {
       console.log(data);
       if (data.login) {
         dispatch(setAuthUser(data));

@@ -1,16 +1,22 @@
 import React from "react";
 import ProfileStatus from "./ProfileStatus";
-import { updateStatusTextCreater } from "../../../redux/main-reducer";
+import {
+  updateStatusTextCreater,
+  setStatus,
+} from "../../../redux/main-reducer";
 import { connect } from "react-redux";
 
 class ProfileStatusContainer extends React.Component {
   render() {
     return (
-      <ProfileStatus
-        status={this.props.status}
-        lol={this.props.updateStatusTextCreate}
-        myProfile={this.props.myProfile}
-      />
+      <>
+        <ProfileStatus
+          setStatus={this.props.setStatus}
+          status={this.props.status}
+          statusUpdater={this.props.updateStatusTextCreate}
+          myProfile={this.props.myProfile}
+        />
+      </>
     );
   }
 }
@@ -27,6 +33,9 @@ let mapDispatchToProps = (dispatch) => {
     updateStatusTextCreate(text) {
       text = text.target.value;
       dispatch(updateStatusTextCreater(text));
+    },
+    setStatus(status) {
+      dispatch(setStatus(status));
     },
   };
 };

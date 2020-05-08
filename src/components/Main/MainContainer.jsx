@@ -1,38 +1,31 @@
 import React from "react";
 import { connect } from "react-redux";
 import Main from "./Main";
-import { getUser, toggleFetching, checkUser} from "../../redux/main-reducer";
+import { getUser, toggleFetching, checkUser } from "../../redux/main-reducer";
 import { withRouter, Redirect } from "react-router-dom";
 import UserProfile from "./UserProfile/UserProfile";
 import { withAuthRedirect } from "../HOC/withAuthRedirect";
 import { compose } from "redux";
+import LoaderImg from "../LoaderImg/LoaderImg";
+import { takeApiStatus } from "../../redux/main-reducer";
 
 class MainAPI extends React.Component {
   componentDidMount = () => {
     if (this.props.match.params.userId) {
       this.props.checkUser(this.props.match.params.userId);
     }
+    this.props.takeApiStatus(this.props.id);
   };
 
   render = () => {
     if (!this.props.isAuth) return <Redirect to="/login" />;
-
-    if (this.props.isFetching === true) {
-      return (
-        <img
-          width="70"
-          src="https://s4.gifyu.com/images/loading.gif"
-          alt="fetching"
-        />
-      );
-    }
-    if (this.props.match.params.userId) {
+    if (this.props.isFetching) return <LoaderImg />;
+    else if (this.props.match.params.userId) {
       return (
         <UserProfile
           toggleFetching={this.props.toggleFetching}
-          userId={this.props.match.params.userId}
           isFetching={this.props.isFetching}
-          profile={this.props.myProfile}
+          profile={this.props.profile}
         />
       );
     } else {
@@ -50,15 +43,15 @@ class MainAPI extends React.Component {
 }
 
 let mapStateToProps = (state) => {
-  let { posts, postText, profile, isFetching } = state.myProfile;
   return {
-    posts,
-    text: postText,
-    profile,
-    isFetching,
+    posts : state.myProfile.posts,
+    text: state.myProfile.postText,
+    profile: state.myProfile.profile,
+    isFetching : state.myProfile.isFetching,
     isAuth: state.auth.isAuth,
     myProfileId: state.auth.id,
-    myProfile: state.myProfile.myProfile
+    myProfile: state.myProfile.myProfile,
+    id: state.auth.id,
   };
 };
 
@@ -67,7 +60,8 @@ export default compose(
   connect(mapStateToProps, {
     getUser,
     toggleFetching,
-    checkUser
+    checkUser,
+    takeApiStatus, // получем статус из апи
   }),
   withAuthRedirect
 )(MainAPI);

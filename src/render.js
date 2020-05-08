@@ -4,7 +4,6 @@ import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import store from "./redux/store";
 import { Provider } from "react-redux";
-import {register} from './serviceWorker';
 
 export let rerenderEntrieTree = () => {
   ReactDOM.render(
@@ -16,7 +15,7 @@ export let rerenderEntrieTree = () => {
     document.getElementById("root")
   );
 };
-register()
+
 rerenderEntrieTree();
 
 

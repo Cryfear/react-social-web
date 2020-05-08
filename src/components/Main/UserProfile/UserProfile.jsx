@@ -1,18 +1,11 @@
 import React from "react";
+import LoaderImg from "../../LoaderImg/LoaderImg";
 
 function UserProfile(props) {
-  if (props.profile === null) {
+  if (props.profile === null) return <LoaderImg />;
+  else {
     return (
-      <img
-        width="70"
-        src="https://s4.gifyu.com/images/loading.gif"
-        alt="fetching"
-      />
-    );
-  } else {
-    return (
-      <div key="1" className="UserProfile">
-        {console.log(props.profile)}
+      <div className="UserProfile">
         <div className="UserProfile__photo">
           <img
             width="200"
@@ -21,7 +14,7 @@ function UserProfile(props) {
               props.profile.photos.small ||
               "https://sun2.beltelecom-by-minsk.userapi.com/bstVldkt1nkT79RZoGYwXj3An8kx-Fht3sgtdQ/Xx4M4GhQmaA.jpg"
             }
-            alt=""
+            alt="userPhoto"
             className="UserProfile__img"
           />
         </div>
@@ -55,7 +48,7 @@ function UserProfile(props) {
         <div className="UserProfile__lookingJob">
           <div className="UserProfile__isLookin">looking for a job: </div>
           <div className="UserProfile__lookingDesc">
-            looking for a job description:{" "}
+            looking for a job description:
           </div>
         </div>
       </div>

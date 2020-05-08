@@ -15,6 +15,7 @@ class ProfileStatus extends React.Component {
     this.setState({
       editMode: false,
     });
+    this.props.setStatus(this.props.status);
   };
 
   render = () => {
@@ -29,7 +30,7 @@ class ProfileStatus extends React.Component {
               onBlur={this.statusTypingFalse}
               type="text"
               value={this.props.status}
-              onChange={this.props.lol}
+              onChange={this.props.statusUpdater}
             />
           </div>
         )}

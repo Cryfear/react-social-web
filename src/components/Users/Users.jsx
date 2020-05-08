@@ -31,7 +31,7 @@ function Users(props) {
                   className="avatarUser"
                   src={
                     user.photos.small ||
-                    "https://sun2.beltelecom-by-minsk.userapi.com/bstVldkt1nkT79RZoGYwXj3An8kx-Fht3sgtdQ/Xx4M4GhQmaA.jpg"
+                    "https://sun9-58.userapi.com/LA8GEcGKOMA6hBB2OrEu7EC4FhWRYX_Vkl7VhA/XtiUVoelf2c.jpg"
                   }
                   alt="ava"
                 />
@@ -43,7 +43,7 @@ function Users(props) {
                       (id) => id === user.id
                     )}
                     onClick={() => {
-                      props.unfollow(user.id)
+                      props.unfollow(user.id);
                     }}
                   >
                     unfollow
@@ -52,7 +52,7 @@ function Users(props) {
                   <button
                     disabled={props.buttonsDisabled.some((m) => m === user.id)}
                     onClick={() => {
-                      props.follow(user.id)
+                      props.follow(user.id);
                     }}
                   >
                     follow
