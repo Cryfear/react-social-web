@@ -30,7 +30,7 @@ function App(props) {
       <Route path="/settings" render={Settings} />
       <Route path="/users" render={() => <UsersContainer />} />
       <Route path="/profile/:userId?" render={() => <MainContainer />} />
-      <Route path="/login" render={Login} />
+      <Route path="/login" render={() => <Login />} />
     </div>
   );
 }

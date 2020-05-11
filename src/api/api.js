@@ -46,9 +46,23 @@ export const myProfileApi = {
     });
   },
   setStatus(status) {
+    return instance.put(`profile/status`, {
+      status,
+    });
+  },
+};
+
+export const AuthApi = {
+  login(email, password, rememberMe) {
     return instance
-      .put(`profile/status`, {
-        status
+      .post(`auth/login`, {
+        email,
+        password,
+        rememberMe,
       })
+      .then((response) => response.data);
+  },
+  logout() {
+    return instance.delete(`auth/login`);
   },
 };

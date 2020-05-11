@@ -139,7 +139,6 @@ export const takeApiStatus = (id) => {
   return (dispatch) => {
     dispatch(toggleFetching(true));
     myProfileApi.getStatus(id).then((response) => {
-      console.log('there');
       dispatch(ApiStatus(response));
       dispatch(toggleFetching(false));
     });

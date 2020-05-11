@@ -44,10 +44,10 @@ class MainAPI extends React.Component {
 
 let mapStateToProps = (state) => {
   return {
-    posts : state.myProfile.posts,
+    posts: state.myProfile.posts,
     text: state.myProfile.postText,
     profile: state.myProfile.profile,
-    isFetching : state.myProfile.isFetching,
+    isFetching: state.myProfile.isFetching,
     isAuth: state.auth.isAuth,
     myProfileId: state.auth.id,
     myProfile: state.myProfile.myProfile,

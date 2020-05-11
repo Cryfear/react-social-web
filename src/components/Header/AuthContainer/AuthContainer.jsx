@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { setUser } from "../../../redux/auth-reducer";
+import { setUser, logoutUser } from "../../../redux/auth-reducer";
 
 class Auth extends React.Component {
   componentDidMount = () => {
@@ -11,7 +11,12 @@ class Auth extends React.Component {
     if (!this.props.isAuth) {
       return <div className="loginWrapper">not autorized</div>;
     }
-    return <div className="loginWrapper">{this.props.login}</div>;
+    return (
+      <div className="loginWrapper">
+        {this.props.login}
+        <button onClick={this.props.logoutUser}>logout</button>
+      </div>
+    );
   }
 }
 
@@ -25,6 +30,6 @@ let mapStateToProps = (state) => {
   };
 };
 
-let AuthContainer = connect(mapStateToProps, { setUser })(Auth);
+let AuthContainer = connect(mapStateToProps, { setUser, logoutUser })(Auth);
 
 export default AuthContainer;
