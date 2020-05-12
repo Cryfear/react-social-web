@@ -1,4 +1,5 @@
 import { myProfileApi, AuthApi } from "../api/api";
+import { stopSubmit } from "redux-form";
 
 const AUTH_USER = "AUTH_USER";
 const LOGOUT_USER = "LOGOUT_USER";
@@ -78,7 +79,17 @@ export const loginUser = (email, password, remember) => {
   return (dispatch) => {
     AuthApi.login(email, password, remember).then((response) => {
       if (response.resultCode === 0) {
+        myProfileApi.getMe().then((data) => {
+          // получаем себя после логинизации.
+          console.log(data);
+          if (data.login) {
+            dispatch(setAuthUser(data));
+          }
+        });
         dispatch(loginUserAction());
+      } else {
+        let action = stopSubmit("login", { _error: response.messages[0] });
+        dispatch(action);
       }
     });
   };

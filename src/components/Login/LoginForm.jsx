@@ -25,6 +25,7 @@ function LoginForm(props) {
         validate={[required, maxLength15]}
       />
       <br />
+      {props.error && <div className="login__warning">{props.error}</div>}
       <Field component="input" name="remember" type="checkbox" />
       <span>remember me?</span>
       <br />

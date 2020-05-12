@@ -138,6 +138,7 @@ export const toggleButtonsDisabled = (isDisable, userId) => {
 
 export const getUsers = (currentPage, countView) => {
   return (dispatch) => {
+    dispatch(toggleFetching(true));
     UsersApi.getUser(currentPage, countView).then((data) => {
       dispatch(setUserCount(data.totalCount));
       dispatch(setUsers(data.items));

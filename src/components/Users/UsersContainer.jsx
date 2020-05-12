@@ -22,14 +22,17 @@ export class UsersAPIComponent extends React.Component {
   render() {
     return (
       <>
-        {this.props.isFetching ? <LoaderImg /> : null}
-        <Users
-          switchPagers={this.switchPagers}
-          users={this.props.users}
-          follow={this.props.follow}
-          unfollow={this.props.unfollow}
-          buttonsDisabled={this.props.buttonsDisabled}
-        />
+        {this.props.isFetching ? (
+          <LoaderImg />
+        ) : (
+          <Users
+            switchPagers={this.switchPagers}
+            users={this.props.users}
+            follow={this.props.follow}
+            unfollow={this.props.unfollow}
+            buttonsDisabled={this.props.buttonsDisabled}
+          />
+        )}
       </>
     );
   }

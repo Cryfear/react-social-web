@@ -4,7 +4,7 @@
 }
 
 .login__submit {
-  background-color: rgba(184, 34, 34, 0.575);
+  background-color: rgba(34, 184, 59, 0.575);
   border: none;
   width: 100px;
   height: 40px;
@@ -20,5 +20,14 @@
   background: none;
   width: 200px;
   height: 30px;
+}
+
+.login__warning {
+  color: rgba(231, 15, 15, 0.575);
+  margin: 25px;
+  margin-bottom: 33px;
+  font-weight: bold;
+  margin-left: 0;
+  font-size: 25px;
 }
 

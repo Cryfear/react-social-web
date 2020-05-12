@@ -3,6 +3,7 @@ import LoginForm from "./LoginForm";
 import { reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import { loginUser } from "../../redux/auth-reducer";
+import { Redirect } from "react-router-dom";
 
 export class Login extends React.Component {
   submit = (values) => {
@@ -10,6 +11,7 @@ export class Login extends React.Component {
     this.props.loginUser(email, password, remember);
   };
   render() {
+    if(this.props.isAuth) return <Redirect to="profile"/>
     return (
       <div>
         <ContactForm onSubmit={this.submit} />
