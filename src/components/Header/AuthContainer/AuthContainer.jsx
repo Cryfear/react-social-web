@@ -14,7 +14,7 @@ class Auth extends React.Component {
     return (
       <div className="loginWrapper">
         {this.props.login}
-        <button onClick={this.props.logoutUser}>logout</button>
+        <button onClick={this.props.logoutUser}>Выйти</button>
       </div>
     );
   }

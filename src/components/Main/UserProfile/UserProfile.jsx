@@ -1,5 +1,5 @@
 import React from "react";
-import LoaderImg from "../../LoaderImg/LoaderImg";
+import LoaderImg from "../../assets/LoaderImg";
 
 function UserProfile(props) {
   if (props.profile === null) return <LoaderImg />;
@@ -12,7 +12,7 @@ function UserProfile(props) {
             src={
               props.profile.photos.large ||
               props.profile.photos.small ||
-              "https://sun2.beltelecom-by-minsk.userapi.com/bstVldkt1nkT79RZoGYwXj3An8kx-Fht3sgtdQ/Xx4M4GhQmaA.jpg"
+              "https://sun9-58.userapi.com/LA8GEcGKOMA6hBB2OrEu7EC4FhWRYX_Vkl7VhA/XtiUVoelf2c.jpg"
             }
             alt="userPhoto"
             className="UserProfile__img"

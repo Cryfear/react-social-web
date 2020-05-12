@@ -6,7 +6,7 @@ import { withRouter, Redirect } from "react-router-dom";
 import UserProfile from "./UserProfile/UserProfile";
 import { withAuthRedirect } from "../HOC/withAuthRedirect";
 import { compose } from "redux";
-import LoaderImg from "../LoaderImg/LoaderImg";
+import LoaderImg from "../assets/LoaderImg";
 import { takeApiStatus } from "../../redux/main-reducer";
 
 class MainAPI extends React.Component {

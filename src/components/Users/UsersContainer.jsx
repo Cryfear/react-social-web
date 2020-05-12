@@ -7,7 +7,7 @@ import {
   toggleButtonsDisabled,
   getUsers,
 } from "../../redux/users-reducer";
-import LoaderImg from "../LoaderImg/LoaderImg";
+import LoaderImg from "../assets/LoaderImg";
 import { withAuthRedirect } from "../HOC/withAuthRedirect";
 import { compose } from "redux";
 

@@ -1,0 +1,24 @@
+ .error {
+  border: 1.5px solid red !important;
+  color: red;
+}
+
+.login__submit {
+  background-color: rgba(184, 34, 34, 0.575);
+  border: none;
+  width: 100px;
+  height: 40px;
+  cursor: pointer;
+  border-radius: 20px;
+  color: white;
+  margin-top: 40px;
+}
+
+.login__input {
+  color: white;
+  border: 1px solid white;
+  background: none;
+  width: 200px;
+  height: 30px;
+}
+
