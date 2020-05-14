@@ -1,4 +1,4 @@
-import { setUser, setAuthUser } from "./auth-reducer";
+import { setAuthUser } from "./auth-reducer";
 import { myProfileApi } from "../api/api";
 
 const IS_INITIALIZED = "IS_INITIALIZED";
@@ -30,7 +30,6 @@ export const initializedSuccess = () => {
     return myProfileApi
       .getMe()
       .then((data) => {
-        console.log(data);
         if (data.login) {
           dispatch(setAuthUser(data));
         }

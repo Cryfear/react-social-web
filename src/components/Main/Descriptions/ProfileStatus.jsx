@@ -1,42 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 
-class ProfileStatus extends React.Component {
-  state = {
-    editMode: false,
+const ProfileStatus = (props) => {
+  let [editMode, setEditMode] = useState(false);
+  let [status, setStatus] = useState(props.status || "empty");
+
+  const statusTypingTrue = () => {
+    setEditMode(true);
   };
 
-  statusTypingTrue = () => {
-    this.setState({
-      editMode: true,
-    });
+  const statusTypingFalse = () => {
+    setEditMode(false);
+    props.setStatus(status);
   };
 
-  statusTypingFalse = () => {
-    this.setState({
-      editMode: false,
-    });
-    this.props.setStatus(this.props.status);
-  };
-
-  render = () => {
-    return (
-      <div>
-        {!this.state.editMode && (
-          <div onClick={this.statusTypingTrue}>{this.props.status}</div>
-        )}
-        {this.state.editMode && (
-          <div>
-            <input
-              onBlur={this.statusTypingFalse}
-              type="text"
-              value={this.props.status}
-              onChange={this.props.statusUpdater}
-            />
-          </div>
-        )}
-      </div>
-    );
-  };
-}
+  return (
+    <div>
+      {!editMode && <div onClick={statusTypingTrue}>{status}</div>}
+      {editMode && (
+        <div>
+          <input
+            onBlur={() => {
+              if (!status) {
+                setStatus("empty");
+                statusTypingFalse();
+              } else {
+                statusTypingFalse();
+              }
+            }}
+            type="text"
+            value={status}
+            autoFocus={true}
+            onChange={(event) => {
+              setStatus(event.target.value);
+            }}
+          />
+        </div>
+      )}
+    </div>
+  );
+};
 
 export default ProfileStatus;

@@ -2,7 +2,6 @@ import { UsersApi, myProfileApi } from "../api/api";
 
 const ADD_POST = "ADD-POST";
 const NEW_POST_TEXT = "NEW-POST-TEXT";
-const NEW_STATUS_TEXT = "NEW_STATUS_TEXT";
 const GET_USER = "GET_USER";
 const TOGGLE_FETCHING = "TOGGLE_FETCHING";
 const GET_STATUS = "GET_STATUS";
@@ -41,13 +40,6 @@ export let mainAction = (state = { ...initialState }, action) => {
       return { ...state, postText: action.text };
     }
 
-    case NEW_STATUS_TEXT: {
-      return {
-        ...state,
-        myProfile: { ...state.myProfile, status: action.text },
-      };
-    }
-
     case GET_USER: {
       return { ...state, profile: action.profile };
     }
@@ -83,11 +75,6 @@ export const addPostCreater = () => ({
 
 export const updateNewPostCreater = (text) => ({ 
   type: NEW_POST_TEXT,
-  text,
-});
-
-export const updateStatusTextCreater = (text) => ({ // обновлние нажатий в инпут
-  type: NEW_STATUS_TEXT,
   text,
 });
 

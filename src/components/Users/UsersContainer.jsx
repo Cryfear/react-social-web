@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import React from "react";
+import React, { useEffect } from "react";
 import Users from "./Users";
 import {
   follow,
@@ -11,32 +11,31 @@ import LoaderImg from "../assets/LoaderImg";
 import { withAuthRedirect } from "../HOC/withAuthRedirect";
 import { compose } from "redux";
 
-export class UsersAPIComponent extends React.Component {
-  componentDidMount() {
-    this.props.getUsers(this.props.currentPage, this.props.countView);
-  }
+const UsersAPIComponent = React.memo((props) => {
+  useEffect(() => {
+    props.getUsers(props.currentPage, props.countView);
+  });
 
-  switchPagers = (i) => {
-    this.props.getUsers(i, this.props.countView);
+  const switchPagers = (i) => {
+    props.getUsers(i, props.countView);
   };
-  render() {
-    return (
-      <>
-        {this.props.isFetching ? (
-          <LoaderImg />
-        ) : (
-          <Users
-            switchPagers={this.switchPagers}
-            users={this.props.users}
-            follow={this.props.follow}
-            unfollow={this.props.unfollow}
-            buttonsDisabled={this.props.buttonsDisabled}
-          />
-        )}
-      </>
-    );
-  }
-}
+
+  return (
+    <>
+      {props.isFetching ? (
+        <LoaderImg />
+      ) : (
+        <Users
+          switchPagers={switchPagers}
+          users={props.users}
+          follow={props.follow}
+          unfollow={props.unfollow}
+          buttonsDisabled={props.buttonsDisabled}
+        />
+      )}
+    </>
+  );
+});
 
 let mapStateToProps = (state) => {
   let {
