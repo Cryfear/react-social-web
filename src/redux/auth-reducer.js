@@ -55,36 +55,33 @@ export const logoutUserAction = () => ({
 });
 
 export const setUser = () => {
-  return (dispatch) => {
-    myProfileApi.getMe().then((data) => {
-      console.log(data);
-      if (data.login) {
-        dispatch(setAuthUser(data));
-      }
-    });
+  return async (dispatch) => {
+    let data = await myProfileApi.getMe();
+    console.log(data);
+    if (data.login) {
+      dispatch(setAuthUser(data));
+    }
   };
 };
 
 export const logoutUser = () => {
-  return (dispatch) => {
-    AuthApi.logout().then((response) => {
-      if (response.data.resultCode === 0) {
-        dispatch(logoutUserAction());
-      }
-    });
+  return async (dispatch) => {
+    let response = await AuthApi.logout();
+    if (response.data.resultCode === 0) {
+      dispatch(logoutUserAction());
+    }
   };
 };
 
 export const loginUser = (email, password, remember) => {
-  return (dispatch) => {
-    AuthApi.login(email, password, remember).then((response) => {
-      if (response.resultCode === 0) {
-        dispatch(loginUserAction());
-      } else {
-        let action = stopSubmit("login", { _error: response.messages[0] });
-        dispatch(action);
-      }
-    });
+  return async (dispatch) => {
+    let response = await AuthApi.login(email, password, remember);
+    if (response.resultCode === 0) {
+      dispatch(loginUserAction());
+    } else {
+      let action = stopSubmit("login", { _error: response.messages[0] });
+      dispatch(action);
+    }
   };
 };
 

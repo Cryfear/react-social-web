@@ -73,31 +73,34 @@ export const addPostCreater = () => ({
   type: ADD_POST,
 });
 
-export const updateNewPostCreater = (text) => ({ 
+export const updateNewPostCreater = (text) => ({
   type: NEW_POST_TEXT,
   text,
 });
 
-export const toggleFetching = (toggle) => ({ // загрузка страницы 
+export const toggleFetching = (toggle) => ({
+  // загрузка страницы
   type: TOGGLE_FETCHING,
   toggle,
 });
 
-export const getUser = (profile) => { 
+export const getUser = (profile) => {
   return {
     type: GET_USER,
     profile,
   };
 };
 
-export const getStatus = (status) => { // сетаем статус из апи
+export const getStatus = (status) => {
+  // сетаем статус из апи
   return {
     type: GET_STATUS,
     status: status,
   };
 };
 
-export const ApiStatus = (status) => { // берем статус из апи
+export const ApiStatus = (status) => {
+  // берем статус из апи
   return {
     type: TAKE_API_STATUS,
     status,
@@ -105,30 +108,27 @@ export const ApiStatus = (status) => { // берем статус из апи
 };
 
 export const checkUser = (userId) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch(toggleFetching(true));
-    UsersApi.checkUser(userId).then((response) => {
-      dispatch(getUser(response));
-      dispatch(toggleFetching(false));
-    });
+    let response = await UsersApi.checkUser(userId);
+    dispatch(getUser(response));
+    dispatch(toggleFetching(false));
   };
 };
 
 export const setStatus = (status) => {
-  return (dispatch) => {
-    myProfileApi.setStatus(status).then(() => {
-      dispatch(getStatus(status));
-    });
+  return async (dispatch) => {
+    await myProfileApi.setStatus(status);
+    dispatch(getStatus(status));
   };
 };
 
 export const takeApiStatus = (id) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch(toggleFetching(true));
-    myProfileApi.getStatus(id).then((response) => {
-      dispatch(ApiStatus(response));
-      dispatch(toggleFetching(false));
-    });
+    let response = await myProfileApi.getStatus(id);
+    dispatch(ApiStatus(response));
+    dispatch(toggleFetching(false));
   };
 };
 

@@ -26,15 +26,12 @@ export const initializedCreater = () => {
 };
 
 export const initializedSuccess = () => {
-  return (dispatch) => {
-    return myProfileApi
-      .getMe()
-      .then((data) => {
-        if (data.login) {
-          dispatch(setAuthUser(data));
-        }
-      })
-      .then(() => dispatch(initializedCreater()));
+  return async (dispatch) => {
+    let data = await myProfileApi.getMe();
+    if (data.login) {
+      dispatch(setAuthUser(data));
+    }
+    dispatch(initializedCreater());
   };
 };
 

@@ -137,37 +137,34 @@ export const toggleButtonsDisabled = (isDisable, userId) => {
 };
 
 export const getUsers = (currentPage, countView) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch(toggleFetching(true));
-    UsersApi.getUser(currentPage, countView).then((data) => {
-      dispatch(setUserCount(data.totalCount));
-      dispatch(setUsers(data.items));
-      dispatch(toggleFetching(false));
-    });
+    let data = await UsersApi.getUser(currentPage, countView);
+    dispatch(setUserCount(data.totalCount));
+    dispatch(setUsers(data.items));
+    dispatch(toggleFetching(false));
   };
 };
 
 export const follow = (userId) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch(toggleButtonsDisabled(true, userId));
-    UsersApi.follow(userId).then((response) => {
-      if (response.resultCode === 0) {
-        dispatch(toggleButtonsDisabled(false, userId));
-        dispatch(followAccept(userId));
-      }
-    });
+    let response = await UsersApi.follow(userId);
+    if (response.resultCode === 0) {
+      dispatch(toggleButtonsDisabled(false, userId));
+      dispatch(followAccept(userId));
+    }
   };
 };
 
 export const unfollow = (userId) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch(toggleButtonsDisabled(true, userId));
-    UsersApi.unfollow(userId).then((response) => {
-      if (response.resultCode === 0) {
-        dispatch(toggleButtonsDisabled(false, userId));
-        dispatch(unfollowAccept(userId));
-      }
-    });
+    let response = await UsersApi.unfollow(userId);
+    if (response.resultCode === 0) {
+      dispatch(toggleButtonsDisabled(false, userId));
+      dispatch(unfollowAccept(userId));
+    }
   };
 };
 
