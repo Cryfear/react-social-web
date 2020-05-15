@@ -39,3 +39,7 @@
 .avatarUser {
   width: 150px;
 }
+
+.PageActive {
+  font-weight: bold;
+}

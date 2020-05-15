@@ -1,27 +1,60 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Users.css";
 import { NavLink } from "react-router-dom";
 
-function Users(props) {
-  // let buttons = Math.ceil(props.countUsers / props.countView);
-  let spans = [];
-  for (let i = 1; i <= 25; i++) {
-    spans.push(i);
-  }
+let Users = React.memo((props) => {
+  let [prev, setPrev] = useState(1);
+  let [next, setNext] = useState(5);
+  let [currentPage, setCurrentPage] = useState(1);
+  let allButtonsView = (prev, next) => {
+    let allButtons = [];
+    for (let i = prev; i <= next; i++) {
+      allButtons.push(i);
+    }
+    return allButtons.map((item, index) => {
+      return (
+        <button
+          className={item === currentPage ? "PageActive" : ""}
+          onClick={() => {
+            setCurrentPage(item); // делаем страницу текущей
+            props.switchPagers(item); // меняем страницу пользователей на текущую
+          }}
+          key={index}
+        >
+          {item}
+        </button>
+      );
+    });
+  };
+
   return (
     <div className="userWrapper">
-      {spans.map((m, i) => {
-        return (
-          <button
-            onClick={() => {
-              props.switchPagers(i + 1);
-            }}
-            key={i}
-          >
-            {i + 1}
-          </button>
-        );
-      })}
+      <button
+        onClick={() => {
+          if (prev > 5) {
+            setCurrentPage(prev - 1); // делаем -1, потому что мы возвращаемся на пред стр
+            props.switchPagers(prev - 1);
+            setPrev(prev - 5); // откатываемся на 5 страниц
+            setNext(next - 5);
+          }
+        }}
+      >
+        prev
+      </button>
+      {allButtonsView(prev, next)}
+      <button
+        onClick={() => {
+          if (next < 1000) {
+            // будем допускать что всего 1000 страниц
+            props.switchPagers(next + 1); // делаем +1 потому что идем вперед
+            setCurrentPage(next + 1);
+            setNext(next + 5); // идем вперед на пять страниц
+            setPrev(prev + 5);
+          }
+        }}
+      >
+        next
+      </button>
       {props.users.map((user, i) => {
         return (
           <div key={i}>
@@ -69,11 +102,22 @@ function Users(props) {
           </div>
         );
       })}
-      <button className="showMore" type="button">
+      <button
+        className="showMore"
+        type="button"
+        onClick={() => {
+          setCurrentPage(currentPage + 1);
+          if (currentPage >= next) {
+            setNext(next + 5);
+            setPrev(prev + 5);
+          }
+          return props.showMore(currentPage || 1);
+        }}
+      >
         Показать еще
       </button>
     </div>
   );
-}
+});
 
 export default Users;
