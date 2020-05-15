@@ -48,14 +48,12 @@ let mapStateToProps = (state) => {
   let {
     users,
     countView,
-    countUsers,
     isFetching,
     buttonsDisabled,
   } = state.users; // деструктуризация
   return {
     users,
     countView, // по сколько пользователей показывать
-    countUsers, // сколько у нас всего пользователей
     isFetching, // состояние загрузки пользователей
     buttonsDisabled, // состояние выключеной или включенной кнопки
     isAuth: state.auth.isAuth,

@@ -6,25 +6,24 @@ let Users = React.memo((props) => {
   let [prev, setPrev] = useState(1);
   let [next, setNext] = useState(5);
   let [currentPage, setCurrentPage] = useState(1);
+  
   let allButtonsView = (prev, next) => {
     let allButtons = [];
     for (let i = prev; i <= next; i++) {
-      allButtons.push(i);
-    }
-    return allButtons.map((item, index) => {
-      return (
+      allButtons.push(
         <button
-          className={item === currentPage ? "PageActive" : ""}
+          className={i === currentPage ? "PageActive" : ""}
           onClick={() => {
-            setCurrentPage(item); // делаем страницу текущей
-            props.switchPagers(item); // меняем страницу пользователей на текущую
+            setCurrentPage(i); // делаем страницу текущей
+            props.switchPagers(i); // меняем страницу пользователей на текущую
           }}
-          key={index}
+          key={i}
         >
-          {item}
+          {i}
         </button>
       );
-    });
+    }
+    return allButtons;
   };
 
   return (
@@ -46,7 +45,7 @@ let Users = React.memo((props) => {
         onClick={() => {
           if (next < 1000) {
             // будем допускать что всего 1000 страниц
-            props.switchPagers(next + 1); // делаем +1 потому что идем вперед
+            props.switchPagers(next + 1);
             setCurrentPage(next + 1);
             setNext(next + 5); // идем вперед на пять страниц
             setPrev(prev + 5);
