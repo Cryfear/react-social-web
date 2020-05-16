@@ -62,6 +62,7 @@ let Users = React.memo((props) => {
                 <img
                   className="avatarUser"
                   src={
+                    user.photos.large || 
                     user.photos.small ||
                     "https://sun9-58.userapi.com/LA8GEcGKOMA6hBB2OrEu7EC4FhWRYX_Vkl7VhA/XtiUVoelf2c.jpg"
                   }

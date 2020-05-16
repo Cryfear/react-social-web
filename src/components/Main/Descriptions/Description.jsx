@@ -1,15 +1,24 @@
 import React from "react";
 import ProfileStatusContainer from "./ProfileStatusContainer";
 
-function Description(props) {
-  return (
-    <div className="description">
-      <img className="avatar" alt="avatar" src={props.myProfile.avatar}></img>
-      <ProfileStatusContainer />
-      <div className="education">{props.myProfile.education}</div>
-      <div className="birthday">{props.myProfile.birthday}</div>
-    </div>
-  );
+class Description extends React.Component {
+
+  render() {
+    return (
+      <div className="description">
+        <input type="file" id="axios"/>
+        <button onClick={() =>{
+          let files = document.getElementById('axios');
+          this.props.setPhoto(files.files[0]);
+        }}>Загрузить</button>
+        <img className="avatar" alt="avatar" src={this.props.myProfile.avatar}></img>
+        <ProfileStatusContainer />
+        <div className="education">{this.props.myProfile.education}</div>
+        <div className="birthday">{this.props.myProfile.birthday}</div>
+      </div>
+    );
+  }
+  
 }
 
 export default Description;
