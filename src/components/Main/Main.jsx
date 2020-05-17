@@ -7,6 +7,7 @@ function Main(props) {
   return (
     <main className="content">
       <Description
+      id={props.id}
         setMyProfileDescription={props.setMyProfileDescription}
         getMyProfile={props.getMyProfile}
         setPhoto={props.setPhoto}

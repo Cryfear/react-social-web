@@ -39,6 +39,7 @@ class MainAPI extends React.Component {
       return (
         <>
           <Main
+          id={this.props.id}
             setPhoto={this.props.setPhoto}
             myProfile={this.props.myProfile}
             posts={this.props.posts}

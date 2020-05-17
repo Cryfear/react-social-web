@@ -5,7 +5,7 @@ import AvatarLoader from "./Description_Components/AvatarLoader";
 
 class Description extends React.Component {
   componentDidMount() {
-    this.props.getMyProfile(8055);
+    this.props.getMyProfile(this.props.id);
   }
 
   render() {
@@ -24,11 +24,17 @@ class Description extends React.Component {
       youtube,
       mainLink,
     } = this.props.myProfile.contacts;
+    console.log(fullName, this.props.myProfile)
     return (
       // avatar, loader, status
       <div>
         <div className="description">
-          <DescriptionAvatar avatar={this.props.myProfile.avatar} />
+          <DescriptionAvatar
+            avatar={
+              this.props.myProfile.avatar ||
+              "https://sun9-58.userapi.com/LA8GEcGKOMA6hBB2OrEu7EC4FhWRYX_Vkl7VhA/XtiUVoelf2c.jpg"
+            }
+          />
           <AvatarLoader setPhoto={this.props.setPhoto} />
           <div>{fullName + ""}</div>
           <ProfileStatusContainer />
@@ -50,8 +56,11 @@ class Description extends React.Component {
             </div>
           </div>
         </div>
-        <button>Изменить данные</button>
-        <div className="descriptionForm">
+        <button onClick={()=> {
+          let el = document.getElementById('formWrapper');
+          el.classList.toggle('formHidden');
+        }}>Изменить данные</button>
+        <div id="formWrapper" className="descriptionForm formHidden">
           <input className="descr" placeholder="full name" type="text" />
           <input
             className="descr"
@@ -90,7 +99,7 @@ class Description extends React.Component {
                 },
               };
               console.log(obj);
-              this.props.setMyProfileDescription(8055, obj);
+              this.props.setMyProfileDescription(this.props.id, obj);
             }}
           >
             Сохранить

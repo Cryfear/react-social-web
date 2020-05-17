@@ -20,7 +20,7 @@ let initialState = {
   isFetching: true,
   myProfile: {
     avatar:
-      "https://sun9-58.userapi.com/LA8GEcGKOMA6hBB2OrEu7EC4FhWRYX_Vkl7VhA/XtiUVoelf2c.jpg",
+      "",
     status: "",
     lookingForAJob: "",
     lookingForAJobDescription: "",
