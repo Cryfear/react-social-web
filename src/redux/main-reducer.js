@@ -8,6 +8,7 @@ const GET_STATUS = "GET_STATUS";
 const TAKE_API_STATUS = "TAKE_API_STATUS";
 const SET_PHOTO = "SET_PHOTO";
 const GET_PROFILE_PHOTO = "GET_PROFILE_PHOTO";
+const GET_MY_PROFILE = "GET_MY_PROFILE";
 
 let initialState = {
   posts: [
@@ -18,12 +19,22 @@ let initialState = {
   profile: null, // user profile
   isFetching: true,
   myProfile: {
-    name: "Arthur Morphy",
     avatar:
-      "https://sun9-47.userapi.com/c857520/v857520118/13765d/yWNm9_uF_XM.jpg",
+      "https://sun9-58.userapi.com/LA8GEcGKOMA6hBB2OrEu7EC4FhWRYX_Vkl7VhA/XtiUVoelf2c.jpg",
     status: "",
-    education: "Basic, none",
-    birthday: "24.11.2001",
+    lookingForAJob: "",
+    lookingForAJobDescription: "",
+    fullName: "",
+    contacts: {
+      github: "",
+      vk: "",
+      facebook: "",
+      instagram: "",
+      twitter: "",
+      website: "",
+      youtube: "",
+      mainLink: "",
+    },
   },
 };
 
@@ -44,6 +55,29 @@ export let mainAction = (state = { ...initialState }, action) => {
 
     case GET_USER: {
       return { ...state, profile: action.profile };
+    }
+
+    case GET_MY_PROFILE: {
+      return {
+        ...state,
+        myProfile: {
+          ...state.myProfile,
+          lookingForAJob: action.obj.lookingForAJob,
+          lookingForAJobDescription: action.obj.lookingForAJobDescription,
+          fullName: action.obj.fullName,
+          contacts: {
+            ...state.myProfile.contacts,
+            github: action.obj.contacts.github,
+            vk: action.obj.contacts.vk,
+            facebook: action.obj.contacts.facebook,
+            instagram: action.obj.contacts.instagram,
+            twitter: action.obj.contacts.twitter,
+            website: action.obj.contacts.website,
+            youtube: action.obj.contacts.youtube,
+            mainLink: action.obj.contacts.mainLink,
+          },
+        },
+      };
     }
 
     case SET_PHOTO: {
@@ -128,6 +162,13 @@ export const setPhotoCreater = (file) => {
   };
 };
 
+export const getMyProfileCreater = (obj) => {
+  return {
+    type: GET_MY_PROFILE,
+    obj,
+  };
+};
+
 export const ApiStatus = (status) => {
   // берем статус из апи
   return {
@@ -138,10 +179,24 @@ export const ApiStatus = (status) => {
 
 export const checkUser = (userId) => {
   return async (dispatch) => {
-    dispatch(toggleFetching(true));
     let response = await UsersApi.checkUser(userId);
     dispatch(getUser(response));
-    dispatch(toggleFetching(false));
+  };
+};
+
+export const getMyProfile = (userId) => {
+  return async (dispatch) => {
+    //await UsersApi.getMyProfile(userId);
+    let response = await UsersApi.checkUser(userId);
+    dispatch(getMyProfileCreater(response));
+  };
+};
+
+export const setMyProfileDescription = (userId, obj) => {
+  return async (dispatch) => {
+    await UsersApi.getMyProfile(userId, obj);
+    let response = await UsersApi.checkUser(userId);
+    dispatch(getMyProfileCreater(response));
   };
 };
 

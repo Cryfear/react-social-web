@@ -1,7 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
 import Main from "./Main";
-import { getUser, toggleFetching, checkUser, setPhoto } from "../../redux/main-reducer";
+import {
+  getUser,
+  toggleFetching,
+  checkUser,
+  setPhoto,
+  getMyProfile,
+  setMyProfileDescription
+} from "../../redux/main-reducer";
 import { withRouter, Redirect } from "react-router-dom";
 import UserProfile from "./UserProfile/UserProfile";
 import { withAuthRedirect } from "../HOC/withAuthRedirect";
@@ -36,6 +43,8 @@ class MainAPI extends React.Component {
             myProfile={this.props.myProfile}
             posts={this.props.posts}
             text={this.props.text}
+            getMyProfile={this.props.getMyProfile}
+            setMyProfileDescription={this.props.setMyProfileDescription}
           />
         </>
       );
@@ -63,7 +72,9 @@ export default compose(
     toggleFetching,
     checkUser,
     takeApiStatus, // получем статус из апи
-    setPhoto
+    setPhoto,
+    getMyProfile,
+    setMyProfileDescription
   }),
   withAuthRedirect
 )(MainAPI);

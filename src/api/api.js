@@ -32,6 +32,26 @@ export const UsersApi = {
       return response.data;
     });
   },
+  getMyProfile(userId, obj) {
+    console.log(obj);
+    return instance.put("profile", {
+      userId: userId,
+      AboutME: "lol",
+      lookingForAJob: obj.lookingForAJob,
+      lookingForAJobDescription: obj.lookingForAJobDescription,
+      fullName: obj.fullName,
+      contacts: {
+        github: obj.contacts.github,
+        vk: obj.contacts.vk,
+        facebook: obj.contacts.facebook,
+        instagram: obj.contacts.instagram,
+        twitter: obj.contacts.twitter,
+        website: obj.contacts.website,
+        youtube: obj.contacts.youtube,
+        mainLink: obj.contacts.mainLink,
+      },
+    });
+  },
 };
 
 export const myProfileApi = {
