@@ -1,4 +1,5 @@
 import { UsersApi, myProfileApi } from "../api/api";
+import { stopSubmit } from "redux-form";
 
 const ADD_POST = "ADD-POST";
 const NEW_POST_TEXT = "NEW-POST-TEXT";
@@ -19,8 +20,8 @@ let initialState = {
   profile: null, // user profile
   isFetching: true,
   myProfile: {
-    avatar:
-      "",
+    aboutMe: "",
+    avatar: "",
     status: "",
     lookingForAJob: "",
     lookingForAJobDescription: "",
@@ -62,6 +63,7 @@ export let mainAction = (state = { ...initialState }, action) => {
         ...state,
         myProfile: {
           ...state.myProfile,
+          aboutMe: action.obj.aboutMe,
           lookingForAJob: action.obj.lookingForAJob,
           lookingForAJobDescription: action.obj.lookingForAJobDescription,
           fullName: action.obj.fullName,
@@ -186,7 +188,6 @@ export const checkUser = (userId) => {
 
 export const getMyProfile = (userId) => {
   return async (dispatch) => {
-    //await UsersApi.getMyProfile(userId);
     let response = await UsersApi.checkUser(userId);
     dispatch(getMyProfileCreater(response));
   };
@@ -194,9 +195,15 @@ export const getMyProfile = (userId) => {
 
 export const setMyProfileDescription = (userId, obj) => {
   return async (dispatch) => {
-    await UsersApi.getMyProfile(userId, obj);
+    let error = await UsersApi.getMyProfile(userId, obj);
     let response = await UsersApi.checkUser(userId);
-    dispatch(getMyProfileCreater(response));
+    if (response.resultCode === 0) {
+      dispatch(getMyProfileCreater(response));
+    } else {
+      console.log(error.messages[0]);
+      let action = stopSubmit("description", { _error: error.messages[0] });
+      dispatch(action);
+    }
   };
 };
 

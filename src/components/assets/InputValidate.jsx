@@ -15,3 +15,19 @@ export const input = ({ input, meta, placeholder, type }) => {
     </div>
   );
 };
+
+export const inputDescr = ({ input, meta, placeholder}) => {
+  const hasError = meta.touched && meta.error;
+  return (
+    <div className="login">
+      <input
+        {...input}
+        name={input.name}
+        placeholder={placeholder}
+        type='text'
+        className={"descr"  + (hasError ? " error" : "")}
+      />
+      {hasError && <div>{meta.error}</div>}
+    </div>
+  );
+};

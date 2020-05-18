@@ -50,7 +50,7 @@ export const UsersApi = {
         youtube: obj.contacts.youtube,
         mainLink: obj.contacts.mainLink,
       },
-    });
+    }).then(response => response.data);
   },
 };
 

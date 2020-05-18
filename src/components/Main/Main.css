@@ -53,3 +53,8 @@
 .formHidden {
   display: none;
 }
+
+.descriptionError {
+  color: red;
+  font-size: 18px;
+}
